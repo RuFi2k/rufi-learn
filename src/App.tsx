@@ -47,7 +47,7 @@ function App() {
 
     // Commit the batch
     batch.commit().then(() => {
-        console.log('commited')
+        console.log('temp')
     });
   }, [])
 
