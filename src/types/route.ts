@@ -1,5 +1,5 @@
 export interface IRoute {
-  path: string,
-  exact: boolean,
-  component: () => JSX.Element
+  path: string;
+  exact: boolean;
+  component: () => JSX.Element;
 }

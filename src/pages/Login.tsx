@@ -5,6 +5,7 @@ import { AuthLayout } from "../layouts";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { ILogin } from "../types/forms";
+import { ConfirmGuestLoginModal } from "../components/modals";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -110,6 +111,12 @@ const Login = (): JSX.Element => {
         <Link className={classes.link} onClick={handleGuestClick}>
           Guest login
         </Link>
+        <ConfirmGuestLoginModal
+          open={modal}
+          onClose={() => {
+            toggleModal(false);
+          }}
+        />
       </form>
     </AuthLayout>
   );

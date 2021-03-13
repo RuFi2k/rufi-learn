@@ -1,0 +1,60 @@
+import { Avatar, makeStyles } from "@material-ui/core";
+import clsx from "clsx";
+import { Navbar } from "../components";
+
+const useStyles = makeStyles({
+  wrapper: {
+    width: "100vw",
+    height: "100vh",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: "#FFF",
+    boxShadow: "0px 4px 20px 5px rgba(0, 0, 0, 0.25)",
+    height: 70,
+    padding: "0 20px",
+  },
+  logo: {
+    height: 36,
+  },
+  page: {
+    flex: 1,
+    display: "flex",
+  },
+  content: {
+    flex: 1,
+    height: "100%",
+    overflowY: "scroll",
+  },
+  avatar: {
+    backgroundColor: "#1C1C2E",
+  },
+});
+
+type Props = {
+  children: JSX.Element;
+};
+
+const MainLayout = ({ children }: Props): JSX.Element => {
+  const classes = useStyles();
+
+  return (
+    <section className={classes.wrapper}>
+      <div className={classes.header}>
+        <img src="/assets/logo.svg" alt="logo" className={classes.logo} />
+        <Avatar alt="user" classes={{ colorDefault: classes.avatar }} />
+      </div>
+      <div className={classes.page}>
+        <Navbar />
+        <div className={clsx(classes.content, "no-scroll")}>{children}</div>
+      </div>
+    </section>
+  );
+};
+
+export default MainLayout;

@@ -1,8 +1,8 @@
-import { BrowserRouter } from 'react-router-dom'
-import './App.css';
-import 'firebase/firestore'
-import renderRouter from './router';
-import { ScrollLayout } from './layouts';
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import "firebase/firestore";
+import renderRouter from "./router";
+import { ScrollLayout } from "./layouts";
 
 function App() {
   const config = {
@@ -11,10 +11,10 @@ function App() {
     projectId: "rufi-learn",
     storageBucket: "rufi-learn.appspot.com",
     messagingSenderId: "783900561839",
-    appId: "1:783900561839:web:72c22b8fd61fac5de81f5a"
-  }
+    appId: "1:783900561839:web:72c22b8fd61fac5de81f5a",
+  };
 
-  const Routes = renderRouter
+  const Routes = renderRouter;
 
   return (
     <BrowserRouter>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { object, ref, string } from "yup";
 import { Button, Input, Link } from "../components";
 import { AuthLayout } from "../layouts";
@@ -30,11 +30,11 @@ const Register = (): JSX.Element => {
   const [disabled, toggleDisabled] = useState<boolean>(false);
 
   const handleSubmit = (values: IRegister): void => {
-    toggleDisabled(true)
-    console.log(values)
+    toggleDisabled(true);
+    console.log(values);
     setTimeout(() => {
-      toggleDisabled(false)
-    }, 1500)
+      toggleDisabled(false);
+    }, 1500);
   };
 
   const schema = object().shape({
