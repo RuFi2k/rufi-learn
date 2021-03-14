@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     background: "#FFF",
     boxShadow: "0px 4px 20px 5px rgba(0, 0, 0, 0.25)",
-    height: 70,
+    minHeight: 70,
     padding: "0 20px",
   },
   logo: {
@@ -25,11 +25,13 @@ const useStyles = makeStyles({
   page: {
     flex: 1,
     display: "flex",
+    overflow: "hidden",
   },
   content: {
     flex: 1,
     height: "100%",
     overflowY: "scroll",
+    padding: 20,
   },
   avatar: {
     backgroundColor: "#1C1C2E",
@@ -38,9 +40,10 @@ const useStyles = makeStyles({
 
 type Props = {
   children: JSX.Element;
+  withNavbar: boolean;
 };
 
-const MainLayout = ({ children }: Props): JSX.Element => {
+const MainLayout = ({ children, withNavbar = false }: Props): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -50,7 +53,7 @@ const MainLayout = ({ children }: Props): JSX.Element => {
         <Avatar alt="user" classes={{ colorDefault: classes.avatar }} />
       </div>
       <div className={classes.page}>
-        <Navbar />
+        {withNavbar && <Navbar />}
         <div className={clsx(classes.content, "no-scroll")}>{children}</div>
       </div>
     </section>

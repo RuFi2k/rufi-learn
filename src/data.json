@@ -616,7 +616,7 @@
           "themes": [
             {
               "name": "Standartization",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/standartization.svg",
               "useful_links": [
                 "https://en.wikipedia.org/wiki/Web_standards",
@@ -628,7 +628,7 @@
             },
             {
               "name": "W3C",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/w3c.svg",
               "useful_links": [
                 "https://www.w3.org/standards/about.html",
@@ -643,7 +643,7 @@
             },
             {
               "name": "TC39",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/tc39.svg",
               "useful_links": [
                 "https://2ality.com/2015/11/tc39-process.html",
@@ -656,7 +656,7 @@
             },
             {
               "name": "WHATWG",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/whatwg.svg",
               "useful_links": [
                 "https://whatwg.org/faq",
@@ -671,7 +671,7 @@
             },
             {
               "name": "Specifications",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/specifications.svg",
               "useful_links": [
                 "https://timothygu.me/es-howto/",
@@ -684,7 +684,7 @@
             },
             {
               "name": "Browser Engines",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/browser-engines.svg",
               "useful_links": [
                 "https://medium.com/@jonbiro/browser-engines-chromium-v8-blink-gecko-webkit-98d6b0490968",
@@ -697,7 +697,7 @@
             },
             {
               "name": "Webkit",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/webkit.svg",
               "useful_links": ["https://webkit.org/"],
               "author": "Ruslan Filyk",
@@ -705,7 +705,7 @@
             },
             {
               "name": "Blink",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/blink.svg",
               "useful_links": [
                 "https://en.wikipedia.org/wiki/Blink_(browser_engine)"
@@ -715,7 +715,7 @@
             },
             {
               "name": "HTTP",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/http.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Web/HTTP",
@@ -728,7 +728,7 @@
             },
             {
               "name": "Gecko",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/gecko.svg",
               "useful_links": [
                 "https://en.wikipedia.org/wiki/Gecko_(software)"
@@ -738,7 +738,7 @@
             },
             {
               "name": "The Internet",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/the-internet.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Web/HTTP",
@@ -751,7 +751,7 @@
             },
             {
               "name": "Polyfills",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/polyfills.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Glossary/Polyfill",
@@ -764,7 +764,7 @@
             },
             {
               "name": "Debugging",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/debugging.svg",
               "useful_links": [
                 "https://developers.google.com/web/tools/chrome-devtools/inspect-styles/",
@@ -776,7 +776,7 @@
             },
             {
               "name": "Developer Console",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/fundamentals/the-browser/developer-console.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Web/API/Console",
@@ -1457,7 +1457,7 @@
           "themes": [
             {
               "name": "Rendering",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/rendering.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model",
@@ -1470,7 +1470,7 @@
             },
             {
               "name": "Event loop",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/event-loop.svg",
               "useful_links": [
                 "https://youtu.be/cCOL7MC4Pl0",
@@ -1485,7 +1485,7 @@
             },
             {
               "name": "Microtask",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/microtask.svg",
               "useful_links": [
                 "https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/",
@@ -1498,7 +1498,7 @@
             },
             {
               "name": "Stack",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/stack.svg",
               "useful_links": [
                 "https://www.scalyr.com/blog/javascript-stack-trace-understanding-it-and-using-it-to-debug/",
@@ -1511,7 +1511,7 @@
             },
             {
               "name": "Heap",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/heap.svg",
               "useful_links": [
                 "https://developers.google.com/web/tools/chrome-devtools/memory-problems/",
@@ -1525,7 +1525,7 @@
             },
             {
               "name": "RAIL Model",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/rail-model.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rail",
@@ -1544,7 +1544,7 @@
             },
             {
               "name": "requestAnimationFrame",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/requestanimationframe.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution",
@@ -1555,7 +1555,7 @@
             },
             {
               "name": "requestIdleCallback",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/requestidlecallback.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Web/API/Background_Tasks_API",
@@ -1567,7 +1567,7 @@
             },
             {
               "name": "Critical Rendering Path",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/critical-rendering-path.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/critical-rendering-path/",
@@ -1579,7 +1579,7 @@
             },
             {
               "name": "The Pixel Pipeline",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/the-pixel-pipeline.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering#the_pixel_pipeline",
@@ -1592,7 +1592,7 @@
             },
             {
               "name": "Style calculations",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/style-calculator.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations"
@@ -1602,7 +1602,7 @@
             },
             {
               "name": "Transforms",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/transforms.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count#use_transform_and_opacity_changes_for_animations",
@@ -1614,7 +1614,7 @@
             },
             {
               "name": "Paint areas",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/paint-areas.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas",
@@ -1626,7 +1626,7 @@
             },
             {
               "name": "Layout Trashing",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/layout-trashing.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing",
@@ -1638,7 +1638,7 @@
             },
             {
               "name": "Layers",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/layers.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count",
@@ -1650,7 +1650,7 @@
             },
             {
               "name": "Debounce",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/debounce.svg",
               "useful_links": [
                 "https://developers.google.com/web/fundamentals/performance/rendering/debounce-your-input-handlers",
@@ -1662,7 +1662,7 @@
             },
             {
               "name": "CSS Containment",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/css-containment.svg",
               "useful_links": [
                 "https://developers.google.com/web/updates/2016/06/css-containment",
@@ -1676,7 +1676,7 @@
             },
             {
               "name": "Web Workers",
-              "desctiption": "",
+              "description": "",
               "icon": "assets/progresive-webapps/rendering-performance/web-workers.svg",
               "useful_links": [
                 "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
