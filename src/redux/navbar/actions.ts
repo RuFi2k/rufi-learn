@@ -1,4 +1,4 @@
-import { IAction } from "../../types/redux";
+import { IAction } from "../../types";
 
 const actions = {
   SET_LOADING: "navbar/SET_LOADING",

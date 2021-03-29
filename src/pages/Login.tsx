@@ -4,7 +4,7 @@ import { Button, Input, Link } from "../components";
 import { AuthLayout } from "../layouts";
 import { useFormik } from "formik";
 import { object, string } from "yup";
-import { ILogin } from "../types/forms";
+import { ILogin } from "../types";
 import { ConfirmGuestLoginModal } from "../components/modals";
 
 const useStyles = makeStyles({

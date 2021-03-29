@@ -1,4 +1,4 @@
-import { IAction, INavbarState } from "../../types/redux";
+import { IAction, INavbarState } from "../../types";
 import actions from "./actions";
 
 const initialState: INavbarState = {

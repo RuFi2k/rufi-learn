@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Explore, Login, Register } from "./pages";
-import { IRoute } from "./types/route";
+import { Explore, Login, Register, CreateTheme } from "./pages";
+import { IRoute } from "./types";
 
 const routes: IRoute[] = [
   {
@@ -20,6 +20,11 @@ const routes: IRoute[] = [
     component: Explore,
   },
   {
+    path: "/create",
+    exact: true,
+    component: CreateTheme,
+  },
+  {
     path: "/",
     exact: true,
     component: () => <Redirect to="/login" />,
@@ -32,6 +37,7 @@ const renderRouter = (): JSX.Element => {
       {routes.map((r, i) => (
         <Route key={i} path={r.path} exact={r.exact} component={r.component} />
       ))}
+      <Redirect to="/login" />
     </Switch>
   );
 };

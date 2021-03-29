@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import { MainLayout } from "../layouts";
 import data from "../data.json";
 import { CategoryCard } from "../components";
-import { IInternalData } from "../types/data";
+import { IInternalData } from "../types";
 
 const useStyles = makeStyles({
   content: {},

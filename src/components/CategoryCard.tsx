@@ -8,8 +8,9 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import clsx from "clsx";
 import { useState } from "react";
-import { ICategory } from "../types/data";
+import { ICategory } from "../types";
 import { NewBadge } from "./badges";
+import SubcategoryCard from "./SubcategoryCard";
 
 const useStyles = makeStyles({
   card: {
@@ -42,6 +43,12 @@ const useStyles = makeStyles({
   badge: {
     marginLeft: 16,
   },
+  collapse: {
+    display: "flex",
+    alignItems: "center",
+    gap: 27,
+    flexWrap: "wrap",
+  },
 });
 
 const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
@@ -61,6 +68,8 @@ const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
     );
   };
 
+  console.log(subcategories);
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -76,9 +85,9 @@ const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
           </IconButton>
         }
       />
-      <Collapse in={expanded}>
-        {subcategories.map((s) => (
-          <p>{s.name}</p>
+      <Collapse classes={{ wrapperInner: classes.collapse }} in={expanded}>
+        {subcategories.map((s, id) => (
+          <SubcategoryCard title={s.name} id={id} />
         ))}
       </Collapse>
     </Card>

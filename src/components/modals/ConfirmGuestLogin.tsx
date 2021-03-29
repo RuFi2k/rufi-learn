@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { Button } from "..";
-import { IModalProps } from "../../types/modal";
+import { IModalProps } from "../../types";
 import ModalLayout from "./ModalLayout";
 
 const useStyles = makeStyles({

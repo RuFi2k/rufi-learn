@@ -4,7 +4,7 @@ import { useState } from "react";
 import { object, ref, string } from "yup";
 import { Button, Input, Link } from "../components";
 import { AuthLayout } from "../layouts";
-import { IRegister } from "../types/forms";
+import { IRegister } from "../types";
 
 const useStyles = makeStyles({
   loginForm: {
