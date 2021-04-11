@@ -68,8 +68,6 @@ const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
     );
   };
 
-  console.log(subcategories);
-
   return (
     <Card className={classes.card}>
       <CardHeader

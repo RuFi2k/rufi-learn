@@ -1,8 +1,10 @@
 import { combineReducers, createStore, compose } from "redux";
 import { navbar } from "./navbar";
+import { stepper } from "./stepper";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   navbar,
+  stepper,
 });
 
 const composeEnhancers =

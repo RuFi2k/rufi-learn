@@ -5,10 +5,14 @@ import {
   StepLabel,
   StepContent,
   StepConnector,
+  StepIconProps,
 } from "@material-ui/core";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Steps } from "../components";
+import StepIcon from "../components/StepIcon";
 import { MainLayout } from "../layouts";
+import { refreshStepperState } from "../redux/stepper";
 import { IStep } from "../types/forms";
 
 const useStyles = makeStyles({
@@ -20,6 +24,7 @@ const useStyles = makeStyles({
 
 const CreateTheme = (): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [step, setStep] = useState<number>(0);
 
@@ -31,7 +36,10 @@ const CreateTheme = (): JSX.Element => {
     setStep((prev) => --prev);
   };
 
-  const handleSubmit = (): void => undefined;
+  const handleSubmit = (): void => {
+    dispatch(refreshStepperState());
+    setStep(0);
+  };
 
   const stepProps = {
     next: handleNext,
@@ -62,9 +70,15 @@ const CreateTheme = (): JSX.Element => {
         orientation="vertical"
         connector={<StepConnector />}
       >
-        {steps.map((s) => (
+        {steps.map((s, idx) => (
           <Step key={s.title}>
-            <StepLabel>{s.title}</StepLabel>
+            <StepLabel
+              StepIconComponent={(props: StepIconProps) => (
+                <StepIcon props={props} number={idx + 1} />
+              )}
+            >
+              {s.title}
+            </StepLabel>
             <StepContent>{s.component}</StepContent>
           </Step>
         ))}
