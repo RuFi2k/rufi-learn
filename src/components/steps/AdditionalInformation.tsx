@@ -102,7 +102,7 @@ export const AdditionalInformation = ({ submit, prev }: Props): JSX.Element => {
         >
           <TextField
             multiline
-            label="Description"
+            label="Description*"
             value={values.description}
             onBlur={touch}
             variant="outlined"
