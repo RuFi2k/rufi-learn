@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     height: "100%",
     overflowY: "scroll",
     padding: 20,
+    background: '#F2F2F2',
   },
   avatar: {
     backgroundColor: "#1C1C2E",
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
 
 type Props = {
   children: JSX.Element;
-  withNavbar: boolean;
+  withNavbar?: boolean;
 };
 
 const MainLayout = ({ children, withNavbar = false }: Props): JSX.Element => {

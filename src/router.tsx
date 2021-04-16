@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Explore, Login, Register, CreateTheme } from "./pages";
+import { Explore, Login, Register, CreateTheme, ThemeDetails } from "./pages";
 import { IRoute } from "./types";
 
 const routes: IRoute[] = [
@@ -23,6 +23,11 @@ const routes: IRoute[] = [
     path: "/create",
     exact: true,
     component: CreateTheme,
+  },
+  {
+    path: "/details/:id",
+    exact: true,
+    component: ThemeDetails,
   },
   {
     path: "/",

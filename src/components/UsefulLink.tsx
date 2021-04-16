@@ -25,9 +25,10 @@ const useStyles = makeStyles({
 
 type Props = {
   text: string;
+  withDelete?: boolean;
 };
 
-const UsefulLink = ({ text }: Props): JSX.Element => {
+const UsefulLink = ({ text, withDelete = false }: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ const UsefulLink = ({ text }: Props): JSX.Element => {
       >
         {text}
       </a>
-      <DeleteIcon className={classes.delete} onClick={handleDelete} />
+      {withDelete && <DeleteIcon className={classes.delete} onClick={handleDelete} />}
     </div>
   );
 };

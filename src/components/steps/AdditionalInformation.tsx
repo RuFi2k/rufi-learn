@@ -135,7 +135,7 @@ export const AdditionalInformation = ({ submit, prev }: Props): JSX.Element => {
         </form>
         <div className={classes.linksList}>
           {links.map((link) => (
-            <UsefulLink text={link} key={link} />
+            <UsefulLink text={link} key={link} withDelete />
           ))}
         </div>
       </div>
