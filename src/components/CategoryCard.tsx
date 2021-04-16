@@ -5,11 +5,11 @@ import {
   IconButton,
   makeStyles,
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import clsx from "clsx";
 import { useState } from "react";
 import { ICategory } from "../types";
 import { NewBadge } from "./badges";
+import { ExpandMoreIcon } from "./Icons";
 import SubcategoryCard from "./SubcategoryCard";
 
 const useStyles = makeStyles({

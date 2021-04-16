@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch } from "react-redux";
 import { removeLink } from "../redux/stepper";
+import { DeleteIcon } from "./Icons";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -46,7 +46,9 @@ const UsefulLink = ({ text, withDelete = false }: Props): JSX.Element => {
       >
         {text}
       </a>
-      {withDelete && <DeleteIcon className={classes.delete} onClick={handleDelete} />}
+      {withDelete && (
+        <DeleteIcon className={classes.delete} onClick={handleDelete} />
+      )}
     </div>
   );
 };

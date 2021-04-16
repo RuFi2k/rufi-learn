@@ -1,14 +1,14 @@
 import { makeStyles } from "@material-ui/core";
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useHistory } from "react-router";
+import { ArrowBackIosRoundedIcon } from "./Icons";
 
 const useStyles = makeStyles({
   wrapper: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   back: {
-    fontSize: '24px',
+    fontSize: "24px",
     cursor: "pointer",
   },
   title: {
@@ -30,11 +30,13 @@ const DetailsTitle = ({ title }: Props): JSX.Element => {
   const handleBack = (): void => {
     history.goBack();
   };
-  
-  return <div className={classes.wrapper}>
-    <ArrowBackIosRoundedIcon onClick={handleBack} className={classes.back} />
-    <p className={classes.title}>{title}</p>
-  </div>
-}
+
+  return (
+    <div className={classes.wrapper}>
+      <ArrowBackIosRoundedIcon onClick={handleBack} className={classes.back} />
+      <p className={classes.title}>{title}</p>
+    </div>
+  );
+};
 
 export default DetailsTitle;
