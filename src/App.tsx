@@ -3,6 +3,7 @@ import "./App.css";
 import "firebase/firestore";
 import renderRouter from "./router";
 import { ScrollLayout } from "./layouts";
+import { AuthProvider } from "./components";
 
 function App() {
   const config = {
@@ -17,11 +18,13 @@ function App() {
   const Routes = renderRouter;
 
   return (
+    // <AuthProvider>
     <BrowserRouter>
       <ScrollLayout>
         <Routes />
       </ScrollLayout>
     </BrowserRouter>
+    // </AuthProvider>
   );
 }
 
