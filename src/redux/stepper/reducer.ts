@@ -18,7 +18,6 @@ const reducer = (
 ): IStepperState => {
   switch (action.type) {
     case actions.ADD_LINK:
-      console.log("add link", action.data);
       return {
         ...state,
         links: [action.data, ...state.links],

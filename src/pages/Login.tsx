@@ -6,6 +6,9 @@ import { useFormik } from "formik";
 import { object, string } from "yup";
 import { ILogin } from "../types";
 import { ConfirmGuestLoginModal } from "../components/modals";
+import { useDispatch, useSelector } from "react-redux";
+import { getButtonDisabled, loginAction } from "../redux/auth";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -27,8 +30,9 @@ const useStyles = makeStyles({
 
 const Login = (): JSX.Element => {
   const classes = useStyles();
-
-  const [disabled, toggleDisabled] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const disabled = useSelector(getButtonDisabled);
+  const history = useHistory();
 
   const [modal, toggleModal] = useState<boolean>(false);
 
@@ -37,11 +41,8 @@ const Login = (): JSX.Element => {
   };
 
   const handleSubmit = (values: ILogin): void => {
-    toggleDisabled(true);
-    console.log(values);
-    setTimeout(() => {
-      toggleDisabled(false);
-    }, 1500);
+    const { email, password } = values;
+    dispatch(loginAction(email, password, history));
   };
 
   const schema = object().shape({

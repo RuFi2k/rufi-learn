@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core";
+import { AuthContext } from "../components";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -30,6 +32,12 @@ type Props = {
 
 const AuthLayout = ({ children }: Props): JSX.Element => {
   const classes = useStyles();
+  const auth = useContext(AuthContext);
+  const history = useHistory();
+  
+  if(auth && auth.currentUser) {
+    history.push('/explore');
+  }
 
   return (
     <section className={classes.wrapper}>

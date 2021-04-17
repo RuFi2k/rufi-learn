@@ -1,6 +1,8 @@
 import { Avatar, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
+import { useDispatch } from "react-redux";
 import { Navbar } from "../components";
+import { logoutAction } from "../redux/auth";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -46,12 +48,17 @@ type Props = {
 
 const MainLayout = ({ children, withNavbar = false }: Props): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleLogout = (): void => {
+    dispatch(logoutAction());
+  }
 
   return (
     <section className={classes.wrapper}>
       <div className={classes.header}>
         <img src="/assets/logo.svg" alt="logo" className={classes.logo} />
-        <Avatar alt="user" classes={{ colorDefault: classes.avatar }} />
+        <Avatar alt="user" classes={{ colorDefault: classes.avatar }} onClick={handleLogout} />
       </div>
       <div className={classes.page}>
         {withNavbar && <Navbar />}

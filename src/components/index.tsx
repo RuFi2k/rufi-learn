@@ -7,4 +7,5 @@ export { default as Select } from "./Select";
 export { default as DetailsTitle } from "./DetailsTitle";
 export { default as ThemeActions } from "./ThemeActions";
 export { default as AuthProvider, AuthContext } from "./AuthContext";
+export { default as PrivateRoute } from "./PrivateRoute";
 export * as Steps from "./steps";

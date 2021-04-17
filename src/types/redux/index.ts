@@ -1,4 +1,4 @@
-import { rootReducer } from "../../redux";
+import { IAuthState } from "./auth";
 import { INavbarState } from "./navbar";
 import { IStepperState } from "./stepper";
 
@@ -14,4 +14,5 @@ export interface IAction {
 export interface IState {
   navbar: INavbarState;
   stepper: IStepperState;
+  auth: IAuthState;
 }

@@ -1,9 +1,10 @@
 import firebase from "firebase";
 import { createContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { app } from "../services";
 import { IUserContext } from "../types";
 
-export const AuthContext = createContext<IUserContext>({});
+export const AuthContext = createContext<IUserContext | null>(null);
 
 type Props = {
   children: JSX.Element;
@@ -11,9 +12,22 @@ type Props = {
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
   const [currentUser, setUser] = useState<firebase.User | null>(null);
+  const history = useHistory();
 
   useEffect(() => {
-    app.auth().onAuthStateChanged(setUser);
+    if(!currentUser && window.location.pathname !== '/login') {
+      history.push('/login')
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    app.auth().onAuthStateChanged((user) => {
+      setUser(user);
+      if(!user) {
+        history.push('/login');
+      }
+    });
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -18,13 +18,13 @@ function App() {
   const Routes = renderRouter;
 
   return (
-    // <AuthProvider>
     <BrowserRouter>
-      <ScrollLayout>
-        <Routes />
-      </ScrollLayout>
+      <AuthProvider>
+        <ScrollLayout>
+          <Routes />
+        </ScrollLayout>
+      </AuthProvider>
     </BrowserRouter>
-    // </AuthProvider>
   );
 }
 

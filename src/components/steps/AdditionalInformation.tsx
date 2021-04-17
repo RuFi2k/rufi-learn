@@ -45,10 +45,6 @@ export const AdditionalInformation = ({ submit, prev }: Props): JSX.Element => {
 
   const links = useSelector(getLinks);
 
-  useEffect(() => {
-    console.log(links);
-  }, [links]);
-
   const schema = object().shape({
     description: string().required("Description is required."),
   });
@@ -87,7 +83,6 @@ export const AdditionalInformation = ({ submit, prev }: Props): JSX.Element => {
       linkInputRef.current?.value &&
       !links.some((l) => l === linkInputRef.current?.value)
     ) {
-      console.log("dispatch");
       dispatch(addLink(linkInputRef.current.value));
     }
     setFieldValue("link", "");
