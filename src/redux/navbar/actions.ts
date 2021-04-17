@@ -9,4 +9,6 @@ export const setLoading = (data: boolean): IAction => ({
   data,
 });
 
+// export const get
+
 export default actions;

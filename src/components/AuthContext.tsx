@@ -18,6 +18,7 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
     if (!currentUser && window.location.pathname !== "/login") {
       history.push("/login");
     }
+    // eslint-disable-next-line
   }, [currentUser]);
 
   useEffect(() => {

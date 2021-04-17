@@ -35,6 +35,7 @@ const useStyles = makeStyles({
     overflowY: "scroll",
     padding: 20,
     background: "#F2F2F2",
+    position: 'relative',
   },
   avatar: {
     backgroundColor: "#1C1C2E",

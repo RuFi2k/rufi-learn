@@ -71,8 +71,8 @@ const Navbar = (): JSX.Element => {
 
   return (
     <div className={clsx(classes.navbar, "no-scroll")}>
-      {menu.map((section) => (
-        <>
+      {menu.map((section, id) => (
+        <span key={id}>
           <span className={classes.sectionTitle}>{section.title}</span>
           {section.items.map((item) => {
             const Icon = item.icon;
@@ -88,7 +88,7 @@ const Navbar = (): JSX.Element => {
               </div>
             );
           })}
-        </>
+        </span>
       ))}
     </div>
   );
