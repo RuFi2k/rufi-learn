@@ -7,21 +7,25 @@ import { loginActionError, loginActionSuccess } from "./actions";
 function* login(action: IAction): any {
   try {
     const { email, password, history } = action.data;
-    const userCredential = yield call(firebaseService.auth.signInWithEmailAndPassword, email, password);
+    const userCredential = yield call(
+      firebaseService.auth.signInWithEmailAndPassword,
+      email,
+      password
+    );
 
     yield put(loginActionSuccess(userCredential));
-    history.push('/explore');
+    history.push("/explore");
   } catch (e) {
-    console.log('login failed', e.message);
-    yield put(loginActionError(e.message))
+    console.log("login failed", e.message);
+    yield put(loginActionError(e.message));
   }
 }
 
 function* logout(): any {
-  try{
+  try {
     yield call(firebaseService.auth.signOut);
-  } catch(e) {
-    console.log(e.message)
+  } catch (e) {
+    console.log(e.message);
   }
 }
 

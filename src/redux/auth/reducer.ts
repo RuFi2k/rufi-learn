@@ -1,14 +1,17 @@
 import { IAction } from "../../types";
-import { actions } from '.';
+import { actions } from ".";
 import { IAuthState } from "../../types/redux/auth";
 
 const initialState: IAuthState = {
   actionButtonDisabled: false,
-  error: '',
+  error: "",
 };
 
-const AuthReducer = (state: IAuthState = initialState, action: IAction): IAuthState => {
-  switch(action.type) {
+const AuthReducer = (
+  state: IAuthState = initialState,
+  action: IAction
+): IAuthState => {
+  switch (action.type) {
     case actions.LOGIN_ACTION: {
       return {
         ...state,
@@ -25,19 +28,19 @@ const AuthReducer = (state: IAuthState = initialState, action: IAction): IAuthSt
       return {
         ...state,
         actionButtonDisabled: false,
-        error: action.error || 'Unknown error',
+        error: action.error || "Unknown error",
       };
     }
     case actions.REMOVE_SNACKBAR: {
       return {
         ...state,
-        error: '',
+        error: "",
       };
     }
     default: {
       return state;
     }
   }
-}
+};
 
 export default AuthReducer;

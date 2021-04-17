@@ -34,9 +34,9 @@ const AuthLayout = ({ children }: Props): JSX.Element => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
   const history = useHistory();
-  
-  if(auth && auth.currentUser) {
-    history.push('/explore');
+
+  if (auth && auth.currentUser) {
+    history.push("/explore");
   }
 
   return (

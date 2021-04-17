@@ -15,16 +15,16 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   const history = useHistory();
 
   useEffect(() => {
-    if(!currentUser && window.location.pathname !== '/login') {
-      history.push('/login')
+    if (!currentUser && window.location.pathname !== "/login") {
+      history.push("/login");
     }
   }, [currentUser]);
 
   useEffect(() => {
     app.auth().onAuthStateChanged((user) => {
       setUser(user);
-      if(!user) {
-        history.push('/login');
+      if (!user) {
+        history.push("/login");
       }
     });
     // eslint-disable-next-line

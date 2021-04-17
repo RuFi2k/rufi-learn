@@ -52,13 +52,17 @@ const MainLayout = ({ children, withNavbar = false }: Props): JSX.Element => {
 
   const handleLogout = (): void => {
     dispatch(logoutAction());
-  }
+  };
 
   return (
     <section className={classes.wrapper}>
       <div className={classes.header}>
         <img src="/assets/logo.svg" alt="logo" className={classes.logo} />
-        <Avatar alt="user" classes={{ colorDefault: classes.avatar }} onClick={handleLogout} />
+        <Avatar
+          alt="user"
+          classes={{ colorDefault: classes.avatar }}
+          onClick={handleLogout}
+        />
       </div>
       <div className={classes.page}>
         {withNavbar && <Navbar />}
