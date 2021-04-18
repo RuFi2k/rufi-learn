@@ -1,6 +1,7 @@
 import { IAuthState } from "./auth";
 import { INavbarState } from "./navbar";
 import { IStepperState } from "./stepper";
+import { ICategoriesState } from './categories';
 
 export * from "./navbar";
 export * from "./stepper";
@@ -15,4 +16,5 @@ export interface IState {
   navbar: INavbarState;
   stepper: IStepperState;
   auth: IAuthState;
+  categories: ICategoriesState;
 }

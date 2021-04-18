@@ -1,10 +1,9 @@
 import { actions } from ".";
-import { IAction } from "../../types";
+import { IAction, ICategory } from "../../types";
 
 const initialState = {
-  categories: [],
+  items: [],
   isLoading: false,
-  subcategoriesLoading: false,
 };
 
 const categoriesReducer = (state: any = initialState, action: IAction): any => {
@@ -25,7 +24,7 @@ const categoriesReducer = (state: any = initialState, action: IAction): any => {
       return {
         ...state,
         isLoading: false,
-        categories: action.data,
+        items: action.data,
       };
     }
     case actions.GET_CATEGORIES_ERROR: {
@@ -36,29 +35,51 @@ const categoriesReducer = (state: any = initialState, action: IAction): any => {
       };
     }
     case actions.GET_SUBCATEGORIES: {
+      const newCategories = state.items.map((c: ICategory) => {
+        return c.id === action.data
+          ? { ...c, subcategoriesLoading: true, }
+          : c;
+      });
       return {
         ...state,
-        subcategoriesLoading: true,
+        items: newCategories,
       };
     }
     case actions.GET_SUBCATEGORIES_SUCCESS: {
-      const newCategories = state.categories.map((x: any) => {
+      const newCategories = state.items.map((x: ICategory) => {
         return x.id === action.data.categoryId
-          ? { ...x, subcategories: action.data.subcategories }
+          ? { ...x, subcategories: action.data.subcategories, subcategoriesLoading: false, }
           : x;
       });
-      
+
       return {
         ...state,
-        subcategoriesLoading: false,
-        categories: newCategories,
+        items: newCategories,
       };
     }
     case actions.GET_SUBCATEGORIES_ERROR: {
+      const newCategories = state.items.map((x: ICategory) => {
+        return x.id === action.data.categoryId
+          ? { ...x, subcategoriesLoading: false, }
+          : x;
+      });
+
       return {
         ...state,
-        subcategoriesLoading: false,
+        items: newCategories,
         error: action.error,
+      };
+    }
+    case actions.CLEAR_SUBCATEGORIES: {
+      const newCategories = state.items.map((x: ICategory) => {
+        return x.id === action.data
+          ? { ...x, subcategories: [], }
+          : x;
+      });
+
+      return {
+        ...state,
+        items: newCategories,
       };
     }
     default: {

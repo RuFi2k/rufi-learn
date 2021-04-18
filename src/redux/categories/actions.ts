@@ -1,4 +1,4 @@
-import { IAction } from "../../types";
+import { IAction, ICategory, ICategoryResponse, ISubcategory, ISubcategorySuccess } from "../../types";
 
 const actions = {
   SET_LOAING: 'categories/SET_LOADING',
@@ -9,7 +9,8 @@ const actions = {
 
   GET_SUBCATEGORIES: 'categories/GET_SUBCATEGORIES',
   GET_SUBCATEGORIES_SUCCESS: 'categories/GET_SUBCATEGORIES_SUCCESS',
-  GET_SUBCATEGORIES_ERROR: 'categories/_ERROR',
+  GET_SUBCATEGORIES_ERROR: 'categories/GET_SUBCATEGORIES_ERROR',
+  CLEAR_SUBCATEGORIES: 'categories/CLEAR_SUBCATEGORIES',
 };
 
 export const setLoading = (data: boolean): IAction => ({
@@ -21,7 +22,7 @@ export const getCategories = (): IAction => ({
   type: actions.GET_CATEGORIES,
 });
 
-export const getCategoriesSuccess = (data: any): IAction => ({
+export const getCategoriesSuccess = (data: ICategory[]): IAction => ({
   type: actions.GET_CATEGORIES_SUCCESS,
   data,
 });
@@ -31,11 +32,12 @@ export const getCategoriesError = (error: string): IAction => ({
   error,
 });
 
-export const getSubcategories = (): IAction => ({
+export const getSubcategories = (data: string): IAction => ({
   type: actions.GET_SUBCATEGORIES,
+  data,
 });
 
-export const getSubcategoriesSuccess = (data: any): IAction => ({
+export const getSubcategoriesSuccess = (data: ISubcategorySuccess): IAction => ({
   type: actions.GET_SUBCATEGORIES_SUCCESS,
   data,
 });
@@ -43,6 +45,11 @@ export const getSubcategoriesSuccess = (data: any): IAction => ({
 export const getSubcategoriesError = (error: string): IAction => ({
   type: actions.GET_SUBCATEGORIES_ERROR,
   error,
+});
+
+export const clearSubcategories = (data: string): IAction => ({
+  type: actions.CLEAR_SUBCATEGORIES,
+  data,
 });
 
 export default actions;

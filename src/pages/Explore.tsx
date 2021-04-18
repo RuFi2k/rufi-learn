@@ -1,13 +1,10 @@
 import { makeStyles } from "@material-ui/core";
 import { MainLayout } from "../layouts";
-import data from "../data.json";
 import { CategoryCard } from "../components";
-import { IInternalData } from "../types";
 import Loader from "../components/Loader";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getCategories } from "../redux/categories";
-import { app } from "../services";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories, getCategoriesSelector } from "../redux/categories";
 
 const useStyles = makeStyles({
   content: {
@@ -25,21 +22,22 @@ const useStyles = makeStyles({
 const Explore = (): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  const { categories }: IInternalData = data;
+  const categories = useSelector(getCategoriesSelector);
 
   useEffect(() => {
     dispatch(getCategories());
+    // eslint-disable-next-line
   }, []);
 
   return (
     <MainLayout withNavbar>
       <div className={classes.content}>
         <h1 className={classes.heading}>Select category</h1>
-        <Loader />
-        {/* {categories.map((c) => (
-          <CategoryCard {...c} />
-        ))} */}
+        {categories.isLoading
+          ? <Loader />
+          : categories.items.map((c) => (
+          <CategoryCard key={c.id} {...c} />
+        ))}
       </div>
     </MainLayout>
   );

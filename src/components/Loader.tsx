@@ -1,4 +1,5 @@
 import { CircularProgress, makeStyles } from "@material-ui/core";
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -14,13 +15,20 @@ const useStyles = makeStyles({
   },
   loader: {
     color: '#1C1C2E',
-  }
+  },
+  transparent: {
+    background: 'transparent',
+  },
 });
 
-const Loader = (): JSX.Element => {
+type Props = {
+  transparent?: boolean;
+};
+
+const Loader = ({ transparent = false }: Props): JSX.Element => {
   const classes = useStyles();
 
-  return <div className={classes.wrapper}>
+  return <div className={clsx(classes.wrapper, transparent && classes.transparent)}>
     <CircularProgress className={classes.loader} />
   </div>
 }

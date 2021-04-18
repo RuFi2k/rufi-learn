@@ -4,10 +4,13 @@ export interface IInternalData {
 
 export interface ICategory {
   name: string;
+  id: string;
   subcategories: ISubcategory[];
+  subcategoriesLoading: boolean,
 }
 
 export interface ISubcategory {
+  id: string;
   name: string;
   themes: ITheme[];
 }
@@ -24,4 +27,19 @@ export interface ITheme {
 export interface ILink {
   name: string;
   url: string;
+}
+
+export interface ICategoryResponse {
+  id: string;
+  data: () => { name: string };
+}
+
+export interface ISubcategoryResponse {
+  id: string;
+  data: () => { name: string };
+}
+
+export interface ISubcategorySuccess {
+  categoryId: string;
+  subcategories: ISubcategory[];
 }

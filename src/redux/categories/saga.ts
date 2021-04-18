@@ -1,16 +1,28 @@
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { actions } from ".";
+import { IAction, ICategory, ICategoryResponse, ISubcategory, ISubcategoryResponse } from "../../types";
 import { firebaseService } from "../rootSaga";
-import { getCategoriesError, getSubcategoriesError } from "./actions";
+import { getCategoriesError, getCategoriesSuccess, getSubcategoriesError, getSubcategoriesSuccess } from "./actions";
 
-function* getSubcategories() {
+function* getSubcategories(action: IAction) {
   try {
-    // console.log('categories');
-    // const snapshot: { data: any } = yield call(
-    //   firebaseService.firestore.getCollection,
-    //   `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories`
-    // );
-    // console.log(snapshot.data());
+    const { data } = action;
+
+    const snapshot: { docs: ISubcategoryResponse[] } = yield call(
+      firebaseService.firestore.getCollection,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${data}/subcategories`
+    );
+
+    const subcategories = snapshot.docs.map((doc: ISubcategoryResponse) => ({
+      ...doc.data(),
+      id: doc.id,
+      themes: [],
+    } as ISubcategory));
+
+    yield put(getSubcategoriesSuccess({
+      categoryId: data,
+      subcategories,
+    }));
   } catch(e) {
     console.log(e.message);
     yield put(getSubcategoriesError(e.message));
@@ -20,11 +32,18 @@ function* getSubcategories() {
 
 function* getCategories() {
   try {
-    const snapshot: { docs: any } = yield call(
+    const snapshot: { docs: ICategoryResponse[] } = yield call(
       firebaseService.firestore.getCollection,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories`
     );
-    const response = snapshot.docs.map((doc: any) => doc.data());
+    const response = snapshot.docs.map((doc: ICategoryResponse) => ({
+      ...doc.data(),
+      subcategories: [],
+      id: doc.id,
+      subcategoriesLoading: false,
+    } as ICategory));
+    
+    yield put(getCategoriesSuccess(response));
   } catch(e) {
     console.log(e.message);
     yield put(getCategoriesError(e.message));

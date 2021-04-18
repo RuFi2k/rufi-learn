@@ -7,9 +7,12 @@ import {
 } from "@material-ui/core";
 import clsx from "clsx";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSubcategories, getCategorySelector, getSubcategories } from "../redux/categories";
 import { ICategory } from "../types";
 import { NewBadge } from "./badges";
 import { ExpandMoreIcon } from "./Icons";
+import Loader from "./Loader";
 import SubcategoryCard from "./SubcategoryCard";
 
 const useStyles = makeStyles({
@@ -49,13 +52,25 @@ const useStyles = makeStyles({
     gap: 27,
     flexWrap: "wrap",
   },
+  loaderPlaceholder: {
+    position: 'relative',
+    width: '100%',
+    height: 100,
+  }
 });
 
-const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
+const CategoryCard = ({ id }: ICategory): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [expanded, toggleExpanded] = useState<boolean>(false);
+  const category = useSelector(getCategorySelector(id))
 
   const handleExpandClick = (): void => {
+    if(expanded) {
+      dispatch(clearSubcategories(id));
+    } else {
+      dispatch(getSubcategories(id));
+    }
     toggleExpanded((prevState) => !prevState);
   };
 
@@ -68,13 +83,13 @@ const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
     );
   };
 
-  return (
+  return category ? (
     <Card className={classes.card}>
       <CardHeader
         onClick={handleExpandClick}
         className={classes.header}
         classes={{ title: classes.title }}
-        title={generateName(name, true)}
+        title={generateName(category.name, true)}
         action={
           <IconButton aria-label="more">
             <ExpandMoreIcon
@@ -84,12 +99,16 @@ const CategoryCard = ({ name, subcategories }: ICategory): JSX.Element => {
         }
       />
       <Collapse classes={{ wrapperInner: classes.collapse }} in={expanded}>
-        {subcategories.map((s, id) => (
-          <SubcategoryCard title={s.name} id={id} />
+        {category.subcategoriesLoading
+          ? <div className={classes.loaderPlaceholder}>
+              <Loader transparent />
+            </div>
+          : category.subcategories.map((s, id) => (
+          <SubcategoryCard key={s.id} title={s.name} id={s.id} />
         ))}
       </Collapse>
     </Card>
-  );
+  ) : <></>;
 };
 
 export default CategoryCard;
