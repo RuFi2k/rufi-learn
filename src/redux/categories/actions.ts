@@ -1,4 +1,4 @@
-import { IAction, ICategory, ICategoryResponse, ISubcategory, ISubcategorySuccess } from "../../types";
+import { IAction, ICategory, ISubcategorySuccess } from "../../types";
 
 const actions = {
   SET_LOAING: 'categories/SET_LOADING',
@@ -11,6 +11,11 @@ const actions = {
   GET_SUBCATEGORIES_SUCCESS: 'categories/GET_SUBCATEGORIES_SUCCESS',
   GET_SUBCATEGORIES_ERROR: 'categories/GET_SUBCATEGORIES_ERROR',
   CLEAR_SUBCATEGORIES: 'categories/CLEAR_SUBCATEGORIES',
+
+  GET_THEMES: 'categories/GET_THEMES',
+  GET_THEMES_SUCCESS: 'categories/GET_THEMES_SUCCESS',
+  GET_THEMES_ERROR: 'categories/GET_THEMES_ERROR',
+  CLEAR_THEMES: 'categories/CLEAR_THEMES',
 };
 
 export const setLoading = (data: boolean): IAction => ({
@@ -49,6 +54,31 @@ export const getSubcategoriesError = (error: string): IAction => ({
 
 export const clearSubcategories = (data: string): IAction => ({
   type: actions.CLEAR_SUBCATEGORIES,
+  data,
+});
+
+export type ThemesPayload = {
+  categoryId: string;
+  subcategoryId: string;
+};
+
+export const getThemes = (data: ThemesPayload) => ({
+  type: actions.GET_THEMES,
+  data,
+});
+
+export const getThemesSuccess = (data: any) => ({
+  type: actions.GET_THEMES_SUCCESS,
+  data,
+});
+
+export const getThemesError = (error: string) => ({
+  type: actions.GET_THEMES_ERROR,
+  error,
+});
+
+export const clearThemes = (data: ThemesPayload) => ({
+  type: actions.CLEAR_THEMES,
   data,
 });
 

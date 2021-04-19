@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
+import { ThemesModal } from "./modals";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles({
       height: "50%",
       borderRadius: 12,
       background: "linear-gradient(to top, #000000, #00000000)",
+      cursor: 'pointer',
     },
   },
   title: {
@@ -37,21 +38,35 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
     overflow: "hidden",
     textDecoration: "none",
+    cursor: 'pointer',
   },
 });
 
 type Props = {
   title: string;
-  id: string | number;
+  categoryId: string;
+  subcategoryId: string;
 };
 
-const SubcategoryCard = ({ title, id }: Props): JSX.Element => {
+const SubcategoryCard = ({ title, categoryId, subcategoryId }: Props): JSX.Element => {
   const classes = useStyles();
+  const [modalOpen, setModal] = useState<boolean>(false);
+
+  const handleModalOpen = (): void => {
+    setModal(true);
+  }
+
+  const handleModalClose = (): void => {
+    setModal(false);
+  }
 
   return (
-    <Link to={`details/${id}`} className={classes.wrapper}>
-      <span className={classes.title}>{title}</span>
-    </Link>
+    <>
+      <div onClick={handleModalOpen} className={classes.wrapper}>
+        <span className={classes.title}>{title}</span>
+      </div>
+      {modalOpen && <ThemesModal open={modalOpen} onClose={handleModalClose} subcategoryId={subcategoryId} categoryId={categoryId} />}
+    </>
   );
 };
 

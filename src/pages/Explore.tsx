@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { MainLayout } from "../layouts";
 import { CategoryCard } from "../components";
-import Loader from "../components/Loader";
+import { Loader } from "../components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories, getCategoriesSelector } from "../redux/categories";

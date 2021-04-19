@@ -1,8 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { DetailsTitle, ThemeActions } from "../components";
-import UsefulLink from "../components/UsefulLink";
+import { DetailsTitle, ThemeActions, UsefulLink } from "../components";
 import { MainLayout } from "../layouts";
 
 const useStyles = makeStyles({
@@ -98,7 +97,7 @@ const themes = [
     createdAt: "2020-1-1T20:20:20Z",
   },
   {
-    id: "1",
+    id: "3",
     title: "JS",
     description: "jsdesc",
     links: ["1", "2", "3"],

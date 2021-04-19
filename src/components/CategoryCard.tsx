@@ -104,7 +104,7 @@ const CategoryCard = ({ id }: ICategory): JSX.Element => {
               <Loader transparent />
             </div>
           : category.subcategories.map((s, id) => (
-          <SubcategoryCard key={s.id} title={s.name} id={s.id} />
+          <SubcategoryCard key={s.id} title={s.name} subcategoryId={s.id} categoryId={category.id} />
         ))}
       </Collapse>
     </Card>

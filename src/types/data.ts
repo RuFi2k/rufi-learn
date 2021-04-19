@@ -12,6 +12,7 @@ export interface ICategory {
 export interface ISubcategory {
   id: string;
   name: string;
+  themesLoading: boolean;
   themes: ITheme[];
 }
 

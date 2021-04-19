@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Steps } from "../components";
-import StepIcon from "../components/StepIcon";
+import { Steps, StepIcon } from "../components";
 import { MainLayout } from "../layouts";
 import { refreshStepperState } from "../redux/stepper";
 import { IStep } from "../types/forms";

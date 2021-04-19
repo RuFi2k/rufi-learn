@@ -14,12 +14,13 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   const [currentUser, setUser] = useState<firebase.User | null>(null);
   const history = useHistory();
 
-  useEffect(() => {
-    if (!currentUser && window.location.pathname !== "/login") {
-      history.push("/login");
-    }
-    // eslint-disable-next-line
-  }, [currentUser]);
+  // useEffect(() => {
+  //   console.log(currentUser);
+  //   if (!currentUser && window.location.pathname !== "/login") {
+  //     history.push("/login");
+  //   }
+  //   // eslint-disable-next-line
+  // }, [currentUser]);
 
   useEffect(() => {
     app.auth().onAuthStateChanged((user) => {

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { Button, Input, Link } from "../components";
+import { Button, Input, Link, ConfirmGuestLoginModal } from "../components";
 import { AuthLayout } from "../layouts";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { ILogin } from "../types";
-import { ConfirmGuestLoginModal } from "../components/modals";
 import { useDispatch, useSelector } from "react-redux";
 import { getButtonDisabled, loginAction } from "../redux/auth";
 import { useHistory } from "react-router";
