@@ -1,15 +1,15 @@
 import { IAction } from "../../types";
 
 const actions = {
-  GET_LIKED: 'user/GET_LIKED',
-  SET_LIKED: 'user/SET_LIKED',
-  ADD_LIKED: 'user/ADD_LIKED',
-  CHANGE_LIKE_STATUS: 'user/CHANGE_LIKE_STATUS',
+  GET_LIKED: "user/GET_LIKED",
+  SET_LIKED: "user/SET_LIKED",
+  ADD_LIKED: "user/ADD_LIKED",
+  CHANGE_LIKE_STATUS: "user/CHANGE_LIKE_STATUS",
 
-  GET_COMPLETED: 'user/GET_COMPLETED',
-  SET_COMPLETED: 'user/SET_COMPLETED',
-  ADD_COMPLETED: 'user/ADD_COMPLETED',
-  CHANGE_COMPLETE_STATUS: 'user/CHANGE_COMPLETE_STATUS',
+  GET_COMPLETED: "user/GET_COMPLETED",
+  SET_COMPLETED: "user/SET_COMPLETED",
+  ADD_COMPLETED: "user/ADD_COMPLETED",
+  CHANGE_COMPLETE_STATUS: "user/CHANGE_COMPLETE_STATUS",
 };
 
 export const getLiked = (data: string): IAction => ({

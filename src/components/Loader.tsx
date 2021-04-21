@@ -3,21 +3,21 @@ import clsx from "clsx";
 
 const useStyles = makeStyles({
   wrapper: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#00000011',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#00000011",
   },
   loader: {
-    color: '#1C1C2E',
+    color: "#1C1C2E",
   },
   transparent: {
-    background: 'transparent',
+    background: "transparent",
   },
 });
 
@@ -28,9 +28,11 @@ type Props = {
 const Loader = ({ transparent = false }: Props): JSX.Element => {
   const classes = useStyles();
 
-  return <div className={clsx(classes.wrapper, transparent && classes.transparent)}>
-    <CircularProgress className={classes.loader} />
-  </div>
-}
+  return (
+    <div className={clsx(classes.wrapper, transparent && classes.transparent)}>
+      <CircularProgress className={classes.loader} />
+    </div>
+  );
+};
 
 export default Loader;

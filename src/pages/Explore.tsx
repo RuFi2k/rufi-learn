@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories, getCategoriesSelector } from "../redux/categories";
 
 const useStyles = makeStyles({
-  content: {
-  },
+  content: {},
   heading: {
     fontSize: "36px",
     fontWeight: 700,
@@ -33,11 +32,11 @@ const Explore = (): JSX.Element => {
     <MainLayout withNavbar>
       <div className={classes.content}>
         <h1 className={classes.heading}>Select category</h1>
-        {categories.isLoading
-          ? <Loader />
-          : categories.items.map((c) => (
-          <CategoryCard key={c.id} {...c} />
-        ))}
+        {categories.isLoading ? (
+          <Loader />
+        ) : (
+          categories.items.map((c) => <CategoryCard key={c.id} {...c} />)
+        )}
       </div>
     </MainLayout>
   );

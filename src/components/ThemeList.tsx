@@ -5,7 +5,7 @@ import { ThemeRow } from ".";
 import { getCategoriesSelector, setActiveTheme } from "../redux/categories";
 import { ITheme } from "../types";
 
-const useStyles= makeStyles({
+const useStyles = makeStyles({
   wrapper: {},
 });
 
@@ -17,16 +17,22 @@ const ThemeList = ({ themes }: Props): JSX.Element => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { activeCategory, activeSubcategory } = useSelector(getCategoriesSelector);
+  const { activeCategory, activeSubcategory } = useSelector(
+    getCategoriesSelector
+  );
 
   const handleRedirect = (id: string): void => {
     dispatch(setActiveTheme(id));
     history.push(`/details/${activeCategory}/${activeSubcategory}/${id}`);
-  }
+  };
 
-  return <div className={classes.wrapper}>
-    {themes.map(theme => <ThemeRow name={theme.name} onClick={() => handleRedirect(theme.id)} />)}
-  </div>;
-}
+  return (
+    <div className={classes.wrapper}>
+      {themes.map((theme) => (
+        <ThemeRow name={theme.name} onClick={() => handleRedirect(theme.id)} />
+      ))}
+    </div>
+  );
+};
 
 export default ThemeList;

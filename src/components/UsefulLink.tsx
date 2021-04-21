@@ -10,11 +10,11 @@ const useStyles = makeStyles({
   },
   link: {
     height: 30,
-    lineHeight: '30px',
+    lineHeight: "30px",
     maxWidth: "80%",
     textOverflow: "ellipsis",
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
+    overflow: "hidden",
+    whiteSpace: "nowrap",
     color: "#2E76EE",
   },
   delete: {

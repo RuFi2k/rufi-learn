@@ -79,7 +79,7 @@ const ThemeActions = ({ id }: Props): JSX.Element => {
     setLiked(likedList.includes(id));
     setChecked(completedList.includes(id));
     // eslint-disable-next-line
-  }, [likedList, completedList])
+  }, [likedList, completedList]);
 
   const handleLike = (): void => {
     setLiked((prev) => !prev);

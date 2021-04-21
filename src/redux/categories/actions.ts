@@ -1,30 +1,30 @@
 import { IAction, ICategory, ISubcategorySuccess, ITheme } from "../../types";
 
 const actions = {
-  SET_LOAING: 'categories/SET_LOADING',
+  SET_LOAING: "categories/SET_LOADING",
 
-  GET_CATEGORIES: 'categories/GET_CATERORIES',
-  GET_CATEGORIES_SUCCESS: 'categories/GET_CATERORIES_SUCCESS',
-  GET_CATEGORIES_ERROR: 'categories/GET_CATERORIES_ERROR',
+  GET_CATEGORIES: "categories/GET_CATERORIES",
+  GET_CATEGORIES_SUCCESS: "categories/GET_CATERORIES_SUCCESS",
+  GET_CATEGORIES_ERROR: "categories/GET_CATERORIES_ERROR",
 
-  GET_SUBCATEGORIES: 'categories/GET_SUBCATEGORIES',
-  GET_SUBCATEGORIES_SUCCESS: 'categories/GET_SUBCATEGORIES_SUCCESS',
-  GET_SUBCATEGORIES_ERROR: 'categories/GET_SUBCATEGORIES_ERROR',
-  CLEAR_SUBCATEGORIES: 'categories/CLEAR_SUBCATEGORIES',
-  SET_ACTIVE_SUBCATEGORY: 'categories/SET_ACTIVE_SUBCATEGORY',
-  RESET_ACTIVE_SUBCATEGORY: 'categories/RESET_ACTIVE_SUBCATEGORY',
+  GET_SUBCATEGORIES: "categories/GET_SUBCATEGORIES",
+  GET_SUBCATEGORIES_SUCCESS: "categories/GET_SUBCATEGORIES_SUCCESS",
+  GET_SUBCATEGORIES_ERROR: "categories/GET_SUBCATEGORIES_ERROR",
+  CLEAR_SUBCATEGORIES: "categories/CLEAR_SUBCATEGORIES",
+  SET_ACTIVE_SUBCATEGORY: "categories/SET_ACTIVE_SUBCATEGORY",
+  RESET_ACTIVE_SUBCATEGORY: "categories/RESET_ACTIVE_SUBCATEGORY",
 
-  GET_THEMES: 'categories/GET_THEMES',
-  GET_THEMES_SUCCESS: 'categories/GET_THEMES_SUCCESS',
-  GET_THEMES_ERROR: 'categories/GET_THEMES_ERROR',
-  CLEAR_THEMES: 'categories/CLEAR_THEMES',
+  GET_THEMES: "categories/GET_THEMES",
+  GET_THEMES_SUCCESS: "categories/GET_THEMES_SUCCESS",
+  GET_THEMES_ERROR: "categories/GET_THEMES_ERROR",
+  CLEAR_THEMES: "categories/CLEAR_THEMES",
 
-  GET_THEME: 'categories/GET_THEME',
-  GET_THEME_SUCCESS: 'categories/GET_THEME_SUCCESS',
-  GET_THEME_ERROR: 'categories/GET_THEME_ERROR',
+  GET_THEME: "categories/GET_THEME",
+  GET_THEME_SUCCESS: "categories/GET_THEME_SUCCESS",
+  GET_THEME_ERROR: "categories/GET_THEME_ERROR",
 
-  SET_ACTIVE_THEME: 'categories/SET_ACTIVE_THEME',
-  UNSET_ACIVE_THEME: 'categories/UNSET_ACTIVE_THEME',
+  SET_ACTIVE_THEME: "categories/SET_ACTIVE_THEME",
+  UNSET_ACIVE_THEME: "categories/UNSET_ACTIVE_THEME",
 };
 
 export const setLoading = (data: boolean): IAction => ({
@@ -51,7 +51,9 @@ export const getSubcategories = (data: string): IAction => ({
   data,
 });
 
-export const getSubcategoriesSuccess = (data: ISubcategorySuccess): IAction => ({
+export const getSubcategoriesSuccess = (
+  data: ISubcategorySuccess
+): IAction => ({
   type: actions.GET_SUBCATEGORIES_SUCCESS,
   data,
 });
@@ -94,9 +96,11 @@ export const clearThemes = (data: ThemesPayload): IAction => ({
 export type ActiveSubcategoryPayload = {
   categoryId: string;
   subcategoryId: string;
-}
+};
 
-export const setActiveSubcategory = (data: ActiveSubcategoryPayload): IAction => ({
+export const setActiveSubcategory = (
+  data: ActiveSubcategoryPayload
+): IAction => ({
   type: actions.SET_ACTIVE_SUBCATEGORY,
   data,
 });
@@ -106,9 +110,9 @@ export const resetActiveSubcategory = (): IAction => ({
 });
 
 export type ThemeData = {
-  category: string,
-  subcategory: string,
-  id: string,
+  category: string;
+  subcategory: string;
+  id: string;
 };
 
 export const getTheme = (data: ThemeData): IAction => ({

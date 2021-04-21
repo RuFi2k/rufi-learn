@@ -6,7 +6,7 @@ export interface ICategory {
   name: string;
   id: string;
   subcategories: ISubcategory[];
-  subcategoriesLoading: boolean,
+  subcategoriesLoading: boolean;
 }
 
 export interface ISubcategory {

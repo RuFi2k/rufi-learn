@@ -8,7 +8,11 @@ import {
 import clsx from "clsx";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearSubcategories, getCategorySelector, getSubcategories } from "../redux/categories";
+import {
+  clearSubcategories,
+  getCategorySelector,
+  getSubcategories,
+} from "../redux/categories";
 import { ICategory } from "../types";
 import { NewBadge } from "./badges";
 import { ExpandMoreIcon } from "./Icons";
@@ -53,20 +57,20 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   loaderPlaceholder: {
-    position: 'relative',
-    width: '100%',
+    position: "relative",
+    width: "100%",
     height: 100,
-  }
+  },
 });
 
 const CategoryCard = ({ id }: ICategory): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [expanded, toggleExpanded] = useState<boolean>(false);
-  const category = useSelector(getCategorySelector(id))
+  const category = useSelector(getCategorySelector(id));
 
   const handleExpandClick = (): void => {
-    if(expanded) {
+    if (expanded) {
       dispatch(clearSubcategories(id));
     } else {
       dispatch(getSubcategories(id));
@@ -99,16 +103,25 @@ const CategoryCard = ({ id }: ICategory): JSX.Element => {
         }
       />
       <Collapse classes={{ wrapperInner: classes.collapse }} in={expanded}>
-        {category.subcategoriesLoading
-          ? <div className={classes.loaderPlaceholder}>
-              <Loader transparent />
-            </div>
-          : category.subcategories.map((s, id) => (
-          <SubcategoryCard key={s.id} title={s.name} subcategoryId={s.id} categoryId={category.id} />
-        ))}
+        {category.subcategoriesLoading ? (
+          <div className={classes.loaderPlaceholder}>
+            <Loader transparent />
+          </div>
+        ) : (
+          category.subcategories.map((s, id) => (
+            <SubcategoryCard
+              key={s.id}
+              title={s.name}
+              subcategoryId={s.id}
+              categoryId={category.id}
+            />
+          ))
+        )}
       </Collapse>
     </Card>
-  ) : <></>;
+  ) : (
+    <></>
+  );
 };
 
 export default CategoryCard;

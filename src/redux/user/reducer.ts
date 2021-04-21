@@ -1,14 +1,14 @@
-import { IAction } from "../../types"
+import { IAction } from "../../types";
 import { IUserState } from "../../types/redux/user";
-import { actions } from '.';
+import { actions } from ".";
 
 const initialState: IUserState = {
   likedThemes: [],
   completedThemes: [],
-}
+};
 
 const userReducer = (state: IUserState = initialState, action: IAction) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.SET_LIKED: {
       return {
         ...state,
@@ -19,7 +19,7 @@ const userReducer = (state: IUserState = initialState, action: IAction) => {
       return {
         ...state,
         likedThemes: [...state.likedThemes, action.data],
-      }
+      };
     }
     case actions.SET_COMPLETED: {
       return {

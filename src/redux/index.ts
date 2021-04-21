@@ -3,8 +3,8 @@ import createSagaMiddleware from "redux-saga";
 import { navbar } from "./navbar";
 import { stepper } from "./stepper";
 import { auth } from "./auth";
-import { categories } from './categories';
-import { user } from './user';
+import { categories } from "./categories";
+import { user } from "./user";
 import rootSaga from "./rootSaga";
 
 export const rootReducer = combineReducers({

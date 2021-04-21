@@ -1,4 +1,4 @@
 export interface IUserState {
-  likedThemes: string[],
-  completedThemes: string[],
-};
+  likedThemes: string[];
+  completedThemes: string[];
+}

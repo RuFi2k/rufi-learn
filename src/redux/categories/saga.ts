@@ -1,8 +1,22 @@
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { actions } from ".";
-import { IAction, ICategory, ICategoryResponse, ISubcategory, ISubcategoryResponse } from "../../types";
+import {
+  IAction,
+  ICategory,
+  ICategoryResponse,
+  ISubcategory,
+  ISubcategoryResponse,
+} from "../../types";
 import { firebaseService } from "../rootSaga";
-import { getCategoriesError, getCategoriesSuccess, getSubcategoriesError, getSubcategoriesSuccess, getThemeError, getThemesSuccess, getThemeSuccess } from "./actions";
+import {
+  getCategoriesError,
+  getCategoriesSuccess,
+  getSubcategoriesError,
+  getSubcategoriesSuccess,
+  getThemeError,
+  getThemesSuccess,
+  getThemeSuccess,
+} from "./actions";
 
 function* getSubcategories(action: IAction) {
   try {
@@ -13,18 +27,23 @@ function* getSubcategories(action: IAction) {
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${data}/subcategories`
     );
 
-    const subcategories = snapshot.docs.map((doc: ISubcategoryResponse) => ({
-      ...doc.data(),
-      id: doc.id,
-      themes: [],
-      themesLoading: false,
-    } as ISubcategory));
+    const subcategories = snapshot.docs.map(
+      (doc: ISubcategoryResponse) =>
+        ({
+          ...doc.data(),
+          id: doc.id,
+          themes: [],
+          themesLoading: false,
+        } as ISubcategory)
+    );
 
-    yield put(getSubcategoriesSuccess({
-      categoryId: data,
-      subcategories,
-    }));
-  } catch(e) {
+    yield put(
+      getSubcategoriesSuccess({
+        categoryId: data,
+        subcategories,
+      })
+    );
+  } catch (e) {
     console.log(e.message);
     yield put(getSubcategoriesError(e.message));
   }
@@ -36,22 +55,25 @@ function* getCategories() {
       firebaseService.firestore.getCollection,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories`
     );
-    const response = snapshot.docs.map((doc: ICategoryResponse) => ({
-      ...doc.data(),
-      subcategories: [],
-      id: doc.id,
-      subcategoriesLoading: false,
-    } as ICategory));
-    
+    const response = snapshot.docs.map(
+      (doc: ICategoryResponse) =>
+        ({
+          ...doc.data(),
+          subcategories: [],
+          id: doc.id,
+          subcategoriesLoading: false,
+        } as ICategory)
+    );
+
     yield put(getCategoriesSuccess(response));
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
     yield put(getCategoriesError(e.message));
   }
 }
 
 function* getThemes(action: IAction) {
-  try{
+  try {
     const { categoryId, subcategoryId } = action.data;
 
     const snapshot: { docs: any[] } = yield call(
@@ -59,25 +81,29 @@ function* getThemes(action: IAction) {
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
     );
 
-    const response = snapshot.docs.map((doc: { id: string, data: () => any }) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
+    const response = snapshot.docs.map(
+      (doc: { id: string; data: () => any }) => ({
+        ...doc.data(),
+        id: doc.id,
+      })
+    );
 
-    yield put(getThemesSuccess({
-      categoryId,
-      subcategoryId,
-      items: response,
-    }))
-  } catch(e) {
-    console.log('getThemes', e.message);
+    yield put(
+      getThemesSuccess({
+        categoryId,
+        subcategoryId,
+        items: response,
+      })
+    );
+  } catch (e) {
+    console.log("getThemes", e.message);
   }
 }
 
 function* getTheme(action: IAction) {
-  try{
+  try {
     const { category, subcategory, id } = action.data;
-    const doc: { id: string, data: ()=>any } = yield call(
+    const doc: { id: string; data: () => any } = yield call(
       firebaseService.firestore.getDocument,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${id}`
     );
@@ -89,9 +115,9 @@ function* getTheme(action: IAction) {
     };
 
     yield put(getThemeSuccess(response));
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
-    yield put(getThemeError(e.message))
+    yield put(getThemeError(e.message));
   }
 }
 

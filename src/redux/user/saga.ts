@@ -5,33 +5,37 @@ import { firebaseService } from "../rootSaga";
 import { setCompleted, setLiked } from "./actions";
 
 function* getLiked(action: IAction) {
-  try{
+  try {
     const id: string = action.data;
     const doc: { data: () => any } = yield call(
       firebaseService.firestore.getDocument,
-      `users/${id}`,
+      `users/${id}`
     );
     // const reg = new RegExp("^[^_]*themes/");
-    const response: string[] = doc.data().completed.map((x: { id: string }) => x.id);
+    const response: string[] = doc
+      .data()
+      .completed.map((x: { id: string }) => x.id);
     // const response = doc.data().favourites.map((x: string) => x.replace(reg, ''))
 
     yield put(setLiked(response));
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 }
 
 function* getCompleted(action: IAction) {
-  try{
+  try {
     const id: string = action.data;
     const doc: { data: () => any } = yield call(
       firebaseService.firestore.getDocument,
-      `users/${id}`,
+      `users/${id}`
     );
-    const response: string[] = doc.data().completed.map((x: { id: string }) => x.id);
+    const response: string[] = doc
+      .data()
+      .completed.map((x: { id: string }) => x.id);
 
     yield put(setCompleted(response));
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 }

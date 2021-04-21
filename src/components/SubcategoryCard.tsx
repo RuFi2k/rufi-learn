@@ -1,7 +1,10 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { resetActiveSubcategory, setActiveSubcategory } from "../redux/categories";
+import {
+  resetActiveSubcategory,
+  setActiveSubcategory,
+} from "../redux/categories";
 import { ThemesModal } from "./modals";
 
 const useStyles = makeStyles({
@@ -19,7 +22,7 @@ const useStyles = makeStyles({
     background:
       "url(https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg)",
     backgroundSize: "cover",
-    cursor: 'pointer',
+    cursor: "pointer",
     overflow: "hidden",
     "&::after": {
       content: "''",
@@ -40,7 +43,7 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
     overflow: "hidden",
     textDecoration: "none",
-    cursor: 'pointer',
+    cursor: "pointer",
   },
 });
 
@@ -50,27 +53,38 @@ type Props = {
   subcategoryId: string;
 };
 
-const SubcategoryCard = ({ title, categoryId, subcategoryId }: Props): JSX.Element => {
+const SubcategoryCard = ({
+  title,
+  categoryId,
+  subcategoryId,
+}: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [modalOpen, setModal] = useState<boolean>(false);
 
   const handleModalOpen = (): void => {
-    dispatch(setActiveSubcategory({ categoryId, subcategoryId }))
+    dispatch(setActiveSubcategory({ categoryId, subcategoryId }));
     setModal(true);
-  }
+  };
 
   const handleModalClose = (): void => {
     dispatch(resetActiveSubcategory());
     setModal(false);
-  }
+  };
 
   return (
     <>
       <div onClick={handleModalOpen} className={classes.wrapper}>
         <span className={classes.title}>{title}</span>
       </div>
-      {modalOpen && <ThemesModal open={modalOpen} onClose={handleModalClose} subcategoryId={subcategoryId} categoryId={categoryId} />}
+      {modalOpen && (
+        <ThemesModal
+          open={modalOpen}
+          onClose={handleModalClose}
+          subcategoryId={subcategoryId}
+          categoryId={categoryId}
+        />
+      )}
     </>
   );
 };

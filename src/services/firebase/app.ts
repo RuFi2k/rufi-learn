@@ -7,7 +7,7 @@ const firebaseConfig = {
   projectId: "rufi-learn",
   storageBucket: "rufi-learn.appspot.com",
   messagingSenderId: "783900561839",
-  appId: "1:783900561839:web:72c22b8fd61fac5de81f5a"
+  appId: "1:783900561839:web:72c22b8fd61fac5de81f5a",
 };
 
 const app = firebase.initializeApp(firebaseConfig);
