@@ -17,10 +17,11 @@ export interface ISubcategory {
 }
 
 export interface ITheme {
+  id: string;
   name: string;
   description: string;
   icon: string;
-  useful_links: ILink[] | string[]; //update data and remove string array from interface soon TODO
+  useful_links: /*ILink[] |*/ string[]; //update data and remove string array from interface soon TODO
   author: string;
   timestamp: number;
 }

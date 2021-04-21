@@ -1,13 +1,16 @@
 import { makeStyles } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { DetailsTitle, ThemeActions, UsefulLink } from "../components";
+import { DetailsTitle, Loader, ThemeActions, UsefulLink } from "../components";
 import { MainLayout } from "../layouts";
+import { getActiveTheme, getLoading, getTheme, unsetActiveTheme } from "../redux/categories";
 
 const useStyles = makeStyles({
   wrapper: {
     paddingBottom: 52,
     position: "relative",
+    height: '100%',
   },
   header: {
     display: "flex",
@@ -36,104 +39,50 @@ const useStyles = makeStyles({
   },
 });
 
-const themes = [
-  {
-    id: "1",
-    title: "HTML",
-    description: "htmldesc",
-    links: [
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-      "1",
-      "2",
-      "3",
-    ],
-    author: "RuFi",
-    createdAt: "2020-1-1T20:20:20Z",
-  },
-  {
-    id: "2",
-    title: "CSS",
-    description: "cssdesc",
-    links: ["1", "2", "3"],
-    author: "RuFi",
-    createdAt: "2020-1-1T20:20:20Z",
-  },
-  {
-    id: "3",
-    title: "JS",
-    description: "jsdesc",
-    links: ["1", "2", "3"],
-    author: "RuFi",
-    createdAt: "2020-1-1T20:20:20Z",
-  },
-];
+type Params = {
+  category: string,
+  subcategory: string,
+  id: string,
+}
 
 const ThemeDetails = (): JSX.Element => {
   const classes = useStyles();
-  const params = useParams<{ id: string }>();
-
-  const [item, setItem] = useState<any>(null);
+  const dispatch = useDispatch();
+  const { category, subcategory, id } = useParams<Params>();
+  const item = useSelector(getActiveTheme);
+  const loading = useSelector(getLoading);
 
   useEffect(() => {
-    setItem(themes.find((x) => x.id === params.id));
+    if(!item) {
+      dispatch(getTheme({ category, subcategory, id }));
+    }
+    return () => {
+      dispatch(unsetActiveTheme());
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <MainLayout>
       <div className={classes.wrapper}>
-        <div className={classes.header}>
-          <DetailsTitle title={item?.title || "No title available"} />
-          <ThemeActions />
-        </div>
-        <p className={classes.description}>{item?.description}</p>
-        <h2>Useful links</h2>
-        <div className={classes.links}>
-          {item?.links.map((link: string) => (
-            <UsefulLink key={link} text={link} />
-          ))}
-        </div>
-        <div className={classes.footer}>
-          Authored by {item?.author}, {item?.createdAt}
-        </div>
+        {loading
+          ? <Loader transparent />
+          : (<>
+          <div className={classes.header}>
+            <DetailsTitle title={item?.name || "No title available"} />
+            <ThemeActions id={id} />
+          </div>
+          <p className={classes.description}>{item?.description}</p>
+          <h2>Useful links</h2>
+          <div className={classes.links}>
+            {item?.useful_links.map((link: string) => (
+              <UsefulLink key={link} text={link} />
+            ))}
+          </div>
+          <div className={classes.footer}>
+            Authored by {item?.author}, {(item && new Date(item.timestamp).toLocaleString()) || ''}
+          </div>
+        </>)}
       </div>
     </MainLayout>
   );

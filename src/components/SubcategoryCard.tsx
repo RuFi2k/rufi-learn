@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { resetActiveSubcategory, setActiveSubcategory } from "../redux/categories";
 import { ThemesModal } from "./modals";
 
 const useStyles = makeStyles({
@@ -17,6 +19,7 @@ const useStyles = makeStyles({
     background:
       "url(https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg)",
     backgroundSize: "cover",
+    cursor: 'pointer',
     overflow: "hidden",
     "&::after": {
       content: "''",
@@ -27,7 +30,6 @@ const useStyles = makeStyles({
       height: "50%",
       borderRadius: 12,
       background: "linear-gradient(to top, #000000, #00000000)",
-      cursor: 'pointer',
     },
   },
   title: {
@@ -50,13 +52,16 @@ type Props = {
 
 const SubcategoryCard = ({ title, categoryId, subcategoryId }: Props): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [modalOpen, setModal] = useState<boolean>(false);
 
   const handleModalOpen = (): void => {
+    dispatch(setActiveSubcategory({ categoryId, subcategoryId }))
     setModal(true);
   }
 
   const handleModalClose = (): void => {
+    dispatch(resetActiveSubcategory());
     setModal(false);
   }
 

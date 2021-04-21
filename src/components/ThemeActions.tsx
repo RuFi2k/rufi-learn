@@ -1,11 +1,13 @@
 import { makeStyles } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import {
   CheckRoundedIcon,
   FavoriteBorderRoundedIcon,
   FavoriteIcon,
 } from "./Icons";
+import { useSelector } from "react-redux";
+import { getCompletedSelector, getLikedSelector } from "../redux/user";
 const useStyles = makeStyles({
   wrapper: {
     height: 40,
@@ -54,11 +56,30 @@ const useStyles = makeStyles({
   },
 });
 
-const ThemeActions = (): JSX.Element => {
+type Props = {
+  id: string;
+};
+
+const ThemeActions = ({ id }: Props): JSX.Element => {
   const classes = useStyles();
+
+  const likedList = useSelector(getLikedSelector);
+  const completedList = useSelector(getCompletedSelector);
 
   const [liked, setLiked] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLiked(likedList.includes(id));
+    setChecked(completedList.includes(id));
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    setLiked(likedList.includes(id));
+    setChecked(completedList.includes(id));
+    // eslint-disable-next-line
+  }, [likedList, completedList])
 
   const handleLike = (): void => {
     setLiked((prev) => !prev);

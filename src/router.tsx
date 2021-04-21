@@ -28,7 +28,7 @@ const routes: IRoute[] = [
     component: CreateTheme,
   },
   {
-    path: "/details/:id",
+    path: "/details/:category/:subcategory/:id",
     exact: true,
     private: true,
     component: ThemeDetails,

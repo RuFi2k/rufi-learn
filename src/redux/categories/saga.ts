@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { actions } from ".";
 import { IAction, ICategory, ICategoryResponse, ISubcategory, ISubcategoryResponse } from "../../types";
 import { firebaseService } from "../rootSaga";
-import { getCategoriesError, getCategoriesSuccess, getSubcategoriesError, getSubcategoriesSuccess, getThemesSuccess } from "./actions";
+import { getCategoriesError, getCategoriesSuccess, getSubcategoriesError, getSubcategoriesSuccess, getThemeError, getThemesSuccess, getThemeSuccess } from "./actions";
 
 function* getSubcategories(action: IAction) {
   try {
@@ -59,11 +59,10 @@ function* getThemes(action: IAction) {
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
     );
 
-    const response = snapshot.docs.map((doc: { data: () => any }) => ({
+    const response = snapshot.docs.map((doc: { id: string, data: () => any }) => ({
       ...doc.data(),
+      id: doc.id,
     }));
-
-    console.log('response', response);
 
     yield put(getThemesSuccess({
       categoryId,
@@ -73,13 +72,34 @@ function* getThemes(action: IAction) {
   } catch(e) {
     console.log('getThemes', e.message);
   }
-  yield 1;
+}
+
+function* getTheme(action: IAction) {
+  try{
+    const { category, subcategory, id } = action.data;
+    const doc: { id: string, data: ()=>any } = yield call(
+      firebaseService.firestore.getDocument,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${id}`
+    );
+
+    console.log(doc.data());
+    const response = {
+      id: doc.id,
+      ...doc.data(),
+    };
+
+    yield put(getThemeSuccess(response));
+  } catch(e) {
+    console.log(e.message);
+    yield put(getThemeError(e.message))
+  }
 }
 
 function* categoriesSaga() {
   yield takeLatest(actions.GET_CATEGORIES, getCategories);
   yield takeLatest(actions.GET_SUBCATEGORIES, getSubcategories);
   yield takeLatest(actions.GET_THEMES, getThemes);
+  yield takeLatest(actions.GET_THEME, getTheme);
 }
 
 export default categoriesSaga;

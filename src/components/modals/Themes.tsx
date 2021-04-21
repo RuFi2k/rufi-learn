@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeList } from "..";
 import { clearThemes, getSubcategorySelector, getThemes } from "../../redux/categories";
 import { IModalProps } from "../../types";
 import Loader from "../Loader";
@@ -38,7 +39,7 @@ const ThemesModal = ({ categoryId, subcategoryId, onClose, ...props }: Props): J
     <div className={classes.container}>
       {subcategory?.themesLoading
         ? <Loader transparent />
-        : <p>modal</p>}
+        : <ThemeList themes={subcategory?.themes || []} />}
     </div>
   </ModalLayout>;
 }

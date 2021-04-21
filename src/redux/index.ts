@@ -4,6 +4,7 @@ import { navbar } from "./navbar";
 import { stepper } from "./stepper";
 import { auth } from "./auth";
 import { categories } from './categories';
+import { user } from './user';
 import rootSaga from "./rootSaga";
 
 export const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   stepper,
   auth,
   categories,
+  user,
 });
 
 const sagaMiddleware = createSagaMiddleware();

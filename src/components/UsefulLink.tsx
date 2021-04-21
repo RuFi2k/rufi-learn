@@ -7,11 +7,14 @@ const useStyles = makeStyles({
   wrapper: {
     display: "flex",
     justifyContent: "space-between",
-    height: 30,
   },
   link: {
+    height: 30,
+    lineHeight: '30px',
     maxWidth: "80%",
     textOverflow: "ellipsis",
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     color: "#2E76EE",
   },
   delete: {

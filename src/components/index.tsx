@@ -12,6 +12,7 @@ export { default as ThemeList } from './ThemeList';
 export { default as StepIcon } from './StepIcon';
 export { default as Loader } from './Loader';
 export { default as UsefulLink } from './UsefulLink';
+export { default as ThemeRow } from './ThemeRow';
 export * as Steps from "./steps";
 export * from './Icons';
 export * from './modals';

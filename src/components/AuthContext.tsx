@@ -1,6 +1,8 @@
 import firebase from "firebase";
 import { createContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { getCompleted, getLiked } from "../redux/user";
 import { app } from "../services";
 import { IUserContext } from "../types";
 
@@ -13,6 +15,7 @@ type Props = {
 const AuthProvider = ({ children }: Props): JSX.Element => {
   const [currentUser, setUser] = useState<firebase.User | null>(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   console.log(currentUser);
@@ -27,6 +30,9 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
       setUser(user);
       if (!user) {
         history.push("/login");
+      } else {
+        dispatch(getLiked(user.uid));
+        dispatch(getCompleted(user.uid));
       }
     });
     // eslint-disable-next-line

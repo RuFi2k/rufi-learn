@@ -1,13 +1,17 @@
 import { actions } from ".";
 import { IAction, ICategory, ISubcategory } from "../../types";
+import { ICategoriesState } from "../../types/redux/categories";
 
-const initialState = {
+const initialState: ICategoriesState = {
   items: [],
   isLoading: false,
   error: '',
+  activeCategory: '',
+  activeSubcategory: '',
+  activeTheme: null,
 };
 
-const categoriesReducer = (state: any = initialState, action: IAction): any => {
+const categoriesReducer = (state: ICategoriesState = initialState, action: IAction): any => {
   switch(action.type) {
     case actions.SET_LOAING: {
       return {
@@ -118,7 +122,7 @@ const categoriesReducer = (state: any = initialState, action: IAction): any => {
           : x.subcategories;
 
         return { ...x, subcategories };
-      })
+      });
 
       return {
         ...state,
@@ -162,6 +166,47 @@ const categoriesReducer = (state: any = initialState, action: IAction): any => {
       return {
         ...state,
         items: newCategories,
+      };
+    }
+    case actions.SET_ACTIVE_SUBCATEGORY: {
+      const { categoryId, subcategoryId } = action.data;
+      return {
+        ...state,
+        activeCategory: categoryId,
+        activeSubcategory: subcategoryId,
+      };
+    }
+    case actions.RESET_ACTIVE_SUBCATEGORY: {
+      return {
+        ...state,
+        activeCategory: '',
+        activeSubcategory: '',
+      };
+    }
+    case actions.GET_THEME: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case actions.GET_THEME_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        activeTheme: action.data,
+      };
+    }
+    case actions.GET_THEME_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+      }
+    }
+    case actions.UNSET_ACIVE_THEME: {
+      return {
+        ...state,
+        activeTheme: null,
       };
     }
     default: {
