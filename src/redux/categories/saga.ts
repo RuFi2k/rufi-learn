@@ -100,7 +100,7 @@ function* getThemes(action: IAction) {
   }
 }
 
-function* getTheme(action: IAction) {
+export function* getTheme(action: IAction) {
   try {
     const { category, subcategory, id } = action.data;
     const doc: { id: string; data: () => any } = yield call(

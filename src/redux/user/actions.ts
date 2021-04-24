@@ -1,15 +1,18 @@
 import { IAction } from "../../types";
+import { IActionPayload } from "../../types/redux/user";
 
 const actions = {
   GET_LIKED: "user/GET_LIKED",
   SET_LIKED: "user/SET_LIKED",
   ADD_LIKED: "user/ADD_LIKED",
-  CHANGE_LIKE_STATUS: "user/CHANGE_LIKE_STATUS",
+  LIKE: "user/LIKE",
+  DISLIKE: "user/DISLIKE",
 
   GET_COMPLETED: "user/GET_COMPLETED",
   SET_COMPLETED: "user/SET_COMPLETED",
   ADD_COMPLETED: "user/ADD_COMPLETED",
-  CHANGE_COMPLETE_STATUS: "user/CHANGE_COMPLETE_STATUS",
+  COMPLETE: "user/COMPLETE",
+  UNCOMPLETE: "user/UNCOMPLETE",
 };
 
 export const getLiked = (data: string): IAction => ({
@@ -42,13 +45,23 @@ export const addCompleted = (data: string): IAction => ({
   data,
 });
 
-export const changeLikeStatus = (data: boolean): IAction => ({
-  type: actions.CHANGE_LIKE_STATUS,
+export const likeRequest = (data: IActionPayload): IAction => ({
+  type: actions.LIKE,
   data,
 });
 
-export const changeCompleteStatus = (data: boolean): IAction => ({
-  type: actions.CHANGE_COMPLETE_STATUS,
+export const dislikeRequest = (data: IActionPayload): IAction => ({
+  type: actions.DISLIKE,
+  data,
+});
+
+export const completeRequest = (data: IActionPayload): IAction => ({
+  type: actions.COMPLETE,
+  data,
+});
+
+export const uncompleteRequest = (data: IActionPayload): IAction => ({
+  type: actions.UNCOMPLETE,
   data,
 });
 
