@@ -4,7 +4,7 @@ import { CategoryCard } from "../components";
 import { Loader } from "../components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesSelector, getFavouriteCategories } from "../redux/categories";
+import { getCategoriesSelector, getFavouriteCategories, getFavouriteSubcategories } from "../redux/categories";
 
 const useStyles = makeStyles({
   content: {},
@@ -35,7 +35,7 @@ const Favourites = (): JSX.Element => {
         {categories.isLoading ? (
           <Loader />
         ) : (
-          categories.items.map((c) => <CategoryCard key={c.id} {...c} />)
+          categories.items.map((c) => <CategoryCard key={c.id} favourite get={getFavouriteSubcategories} {...c} />)
         )}
       </div>
     </MainLayout>

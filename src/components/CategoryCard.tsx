@@ -11,9 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearSubcategories,
   getCategorySelector,
-  getSubcategories,
+  getFavouriteThemes,
+  getThemes,
 } from "../redux/categories";
-import { ICategory } from "../types";
+import { IAction, ICategory } from "../types";
 import { NewBadge } from "./badges";
 import { ExpandMoreIcon } from "./Icons";
 import Loader from "./Loader";
@@ -63,17 +64,24 @@ const useStyles = makeStyles({
   },
 });
 
-const CategoryCard = ({ id }: ICategory): JSX.Element => {
+interface Props extends ICategory {
+  get: (id: string) => IAction,
+  favourite?: boolean;
+};
+
+const CategoryCard = ({ id, get, favourite = false }: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [expanded, toggleExpanded] = useState<boolean>(false);
   const category = useSelector(getCategorySelector(id));
 
+  const themeAction = favourite ? getFavouriteThemes : getThemes ;
+
   const handleExpandClick = (): void => {
     if (expanded) {
       dispatch(clearSubcategories(id));
     } else {
-      dispatch(getSubcategories(id));
+      dispatch(get(id));
     }
     toggleExpanded((prevState) => !prevState);
   };
@@ -113,6 +121,7 @@ const CategoryCard = ({ id }: ICategory): JSX.Element => {
               key={s.id}
               title={s.name}
               subcategoryId={s.id}
+              get={themeAction}
               categoryId={category.id}
             />
           ))

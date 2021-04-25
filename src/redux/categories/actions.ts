@@ -180,7 +180,7 @@ export const getFavouriteSubcategoriesError = (error: string): IAction => ({
   error,
 });
 
-export const gtFavouriteThemes = (data: ThemesPayload): IAction => ({
+export const getFavouriteThemes = (data: ThemesPayload): IAction => ({
   type: actions.GET_FAVOURITE_THEMES,
   data,
 });

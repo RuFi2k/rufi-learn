@@ -5,9 +5,9 @@ import { ThemeList } from "..";
 import {
   clearThemes,
   getSubcategorySelector,
-  getThemes,
+  ThemesPayload,
 } from "../../redux/categories";
-import { IModalProps } from "../../types";
+import { IAction, IModalProps } from "../../types";
 import Loader from "../Loader";
 import ModalLayout from "./ModalLayout";
 
@@ -22,12 +22,14 @@ const useStyles = makeStyles({
 interface Props extends IModalProps {
   categoryId: string;
   subcategoryId: string;
+  get: (data: ThemesPayload) => IAction;
 }
 
 const ThemesModal = ({
   categoryId,
   subcategoryId,
   onClose,
+  get,
   ...props
 }: Props): JSX.Element => {
   const classes = useStyles();
@@ -45,7 +47,7 @@ const ThemesModal = ({
   };
 
   useEffect(() => {
-    dispatch(getThemes({ categoryId, subcategoryId }));
+    dispatch(get({ categoryId, subcategoryId }));
     // eslint-disable-next-line
   }, []);
 

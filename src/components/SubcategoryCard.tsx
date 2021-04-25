@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import {
   resetActiveSubcategory,
   setActiveSubcategory,
+  ThemesPayload,
 } from "../redux/categories";
+import { IAction } from "../types";
 import { ThemesModal } from "./modals";
 
 const useStyles = makeStyles({
@@ -51,12 +53,14 @@ type Props = {
   title: string;
   categoryId: string;
   subcategoryId: string;
+  get: (data: ThemesPayload) => IAction;
 };
 
 const SubcategoryCard = ({
   title,
   categoryId,
   subcategoryId,
+  get,
 }: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -81,6 +85,7 @@ const SubcategoryCard = ({
         <ThemesModal
           open={modalOpen}
           onClose={handleModalClose}
+          get={get}
           subcategoryId={subcategoryId}
           categoryId={categoryId}
         />
