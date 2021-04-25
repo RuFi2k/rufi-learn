@@ -71,13 +71,13 @@ const ThemeActions = ({ category, subcategory, theme }: IThemeIdentifier): JSX.E
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    setLiked(likedList.includes(theme));
+    setLiked(likedList.some(x => x.theme === theme));
     setChecked(completedList.includes(theme));
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    setLiked(likedList.includes(theme));
+    setLiked(likedList.some(x => x.theme === theme));
     setChecked(completedList.includes(theme));
     // eslint-disable-next-line
   }, [likedList, completedList]);

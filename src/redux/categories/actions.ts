@@ -25,6 +25,18 @@ const actions = {
 
   SET_ACTIVE_THEME: "categories/SET_ACTIVE_THEME",
   UNSET_ACIVE_THEME: "categories/UNSET_ACTIVE_THEME",
+
+  GET_FAVOURITE_CATEGORIES: "categories/GET_FAVOURITE_CATEGORIES",
+  GET_FAVOURITE_CATEGORIES_SUCCESS: "categories/GET_FAVOURITE_CATEGORIES_SUCCESS",
+  GET_FAVOURITE_CATEGORIES_ERROR: "categories/GET_FAVOURITE_CATEGORIES_ERROR",
+
+  GET_FAVOURITE_SUBCATEGORIES: "categories/GET_FAVOURITE_SUBCATEGORIES",
+  GET_FAVOURITE_SUBCATEGORIES_SUCCESS: "categories/GET_FAVOURITE_SUBCATEGORIES_SUCCESS",
+  GET_FAVOURITE_SUBCATEGORIES_ERROR: "categories/GET_FAVOURITE_SUBCATEGORIES_ERROR",
+
+  GET_FAVOURITE_THEMES: "categories/GET_FAVOURITE_THEMES",
+  GET_FAVOURITE_THEMES_SUCCESS: "categories/GET_FAVOURITE_THEMES_SUCCESS",
+  GET_FAVOURITE_THEMES_ERROR: "categories/GET_FAVOURITE_THEMES_ERROR",
 };
 
 export const setLoading = (data: boolean): IAction => ({
@@ -137,6 +149,50 @@ export const setActiveTheme = (data: string): IAction => ({
 
 export const unsetActiveTheme = (): IAction => ({
   type: actions.UNSET_ACIVE_THEME,
+});
+
+export const getFavouriteCategories = (): IAction => ({
+  type: actions.GET_FAVOURITE_CATEGORIES,
+});
+
+export const getFavouriteCategoriesSuccess = (data: ICategory[]): IAction => ({
+  type: actions.GET_FAVOURITE_CATEGORIES_SUCCESS,
+  data,
+});
+
+export const getFavouriteCategoriesError = (error: string): IAction => ({
+  type: actions.GET_FAVOURITE_CATEGORIES_ERROR,
+  error,
+});
+
+export const getFavouriteSubcategories = (data: string): IAction => ({
+  type: actions.GET_FAVOURITE_SUBCATEGORIES,
+  data,
+});
+
+export const getFavouriteSubcategoriesSuccess = (data: ISubcategorySuccess): IAction => ({
+  type: actions.GET_FAVOURITE_SUBCATEGORIES_SUCCESS,
+  data
+});
+
+export const getFavouriteSubcategoriesError = (error: string): IAction => ({
+  type: actions.GET_FAVOURITE_SUBCATEGORIES_ERROR,
+  error,
+});
+
+export const gtFavouriteThemes = (data: ThemesPayload): IAction => ({
+  type: actions.GET_FAVOURITE_THEMES,
+  data,
+});
+
+export const getFavouriteThemesSuccess = (data: ITheme[]): IAction => ({
+  type: actions.GET_FAVOURITE_THEMES_SUCCESS,
+  data,
+});
+
+export const getFavouriteThemesError = (error: string): IAction => ({
+  type: actions.GET_FAVOURITE_THEMES_ERROR,
+  error,
 });
 
 export default actions;

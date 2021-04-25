@@ -1,5 +1,5 @@
 export interface IUserState {
-  likedThemes: string[];
+  likedThemes: IThemeIdentifier[];
   completedThemes: string[];
 }
 

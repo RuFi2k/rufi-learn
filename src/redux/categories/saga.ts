@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "@redux-saga/core/effects";
+import { call, put, select, takeLatest } from "@redux-saga/core/effects";
 import { actions } from ".";
 import {
   IAction,
@@ -6,11 +6,15 @@ import {
   ICategoryResponse,
   ISubcategory,
   ISubcategoryResponse,
+  IThemeIdentifier,
 } from "../../types";
 import { firebaseService } from "../rootSaga";
+import { getLikedSelector } from "../user";
 import {
   getCategoriesError,
   getCategoriesSuccess,
+  getFavouriteCategoriesError,
+  getFavouriteSubcategoriesError,
   getSubcategoriesError,
   getSubcategoriesSuccess,
   getThemeError,
@@ -121,11 +125,107 @@ export function* getTheme(action: IAction) {
   }
 }
 
+function* favouriteCategories() {
+  try{
+    const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
+    console.log(favourites)
+    const favouriteCategories: string[] = favourites.map(x => x.category);
+
+    const snapshot: { docs: ICategoryResponse[] } = yield call(
+      firebaseService.firestore.getCollection,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories`
+    );
+    console.log('snap', snapshot.docs.map(x => x.data()));
+    const response = snapshot.docs.map(
+      (doc: ICategoryResponse) =>
+        ({
+          ...doc.data(),
+          subcategories: [],
+          id: doc.id,
+          subcategoriesLoading: false,
+        } as ICategory)
+    );
+    console.log(favouriteCategories, response);
+
+    yield put(getCategoriesSuccess(response.filter((x => favouriteCategories.includes(x.id)))));
+  } catch(e) {
+    console.log(e.message);
+    yield put(getFavouriteCategoriesError(e.message));
+  }
+}
+
+function* favouriteSubcategories(action: IAction) {
+  try{
+    const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
+
+    const { data } = action;
+
+    const favSubcategories = favourites.filter(x => x.category === data).map(x => x.subcategory);
+
+    const snapshot: { docs: ISubcategoryResponse[] } = yield call(
+      firebaseService.firestore.getCollection,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${data}/subcategories`
+    );
+
+    const subcategories = snapshot.docs.map(
+      (doc: ISubcategoryResponse) =>
+        ({
+          ...doc.data(),
+          id: doc.id,
+          themes: [],
+          themesLoading: false,
+        } as ISubcategory)
+    );
+
+    yield put(getSubcategoriesSuccess({
+      categoryId: data,
+      subcategories: subcategories.filter(x => favSubcategories.includes(x.id)),
+    }));
+  } catch(e) {
+    console.log(e.message);
+    yield put(getFavouriteSubcategoriesError(e.message));
+  }
+}
+
+function* favouriteThemes(action: IAction) {
+  try {
+    const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
+    const { categoryId, subcategoryId } = action.data;
+
+    const favThemes = favourites.filter(x => (x.category === categoryId && x.subcategory === subcategoryId)).map(x => x.theme);
+
+    const snapshot: { docs: any[] } = yield call(
+      firebaseService.firestore.getCollection,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
+    );
+
+    const response = snapshot.docs.map(
+      (doc: { id: string; data: () => any }) => ({
+        ...doc.data(),
+        id: doc.id,
+      })
+    );
+
+    yield put(
+      getThemesSuccess({
+        categoryId,
+        subcategoryId,
+        items: response.filter(x => favThemes.includes(x.id)),
+      })
+    );
+  } catch (e) {
+    console.log("getThemes", e.message);
+  }
+}
+
 function* categoriesSaga() {
   yield takeLatest(actions.GET_CATEGORIES, getCategories);
   yield takeLatest(actions.GET_SUBCATEGORIES, getSubcategories);
   yield takeLatest(actions.GET_THEMES, getThemes);
   yield takeLatest(actions.GET_THEME, getTheme);
+  yield takeLatest(actions.GET_FAVOURITE_CATEGORIES, favouriteCategories);
+  yield takeLatest(actions.GET_FAVOURITE_SUBCATEGORIES, favouriteSubcategories);
+  yield takeLatest(actions.GET_FAVOURITE_THEMES, favouriteThemes);
 }
 
 export default categoriesSaga;

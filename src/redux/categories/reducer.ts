@@ -28,6 +28,12 @@ const categoriesReducer = (
         isLoading: true,
       };
     }
+    case actions.GET_FAVOURITE_CATEGORIES: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     case actions.GET_CATEGORIES_SUCCESS: {
       return {
         ...state,
@@ -43,6 +49,15 @@ const categoriesReducer = (
       };
     }
     case actions.GET_SUBCATEGORIES: {
+      const newCategories = state.items.map((c: ICategory) => {
+        return c.id === action.data ? { ...c, subcategoriesLoading: true } : c;
+      });
+      return {
+        ...state,
+        items: newCategories,
+      };
+    }
+    case actions.GET_FAVOURITE_SUBCATEGORIES: {
       const newCategories = state.items.map((c: ICategory) => {
         return c.id === action.data ? { ...c, subcategoriesLoading: true } : c;
       });
@@ -91,6 +106,30 @@ const categoriesReducer = (
       };
     }
     case actions.GET_THEMES: {
+      const { categoryId, subcategoryId } = action.data;
+
+      const newCategories = state.items.map((x: ICategory) => {
+        const subcategories =
+          x.id === categoryId
+            ? x.subcategories.map((s: ISubcategory) => {
+                return s.id === subcategoryId
+                  ? { ...s, themesLoading: true }
+                  : s;
+              })
+            : x.subcategories;
+
+        return {
+          ...x,
+          subcategories,
+        };
+      });
+
+      return {
+        ...state,
+        items: newCategories,
+      };
+    }
+    case actions.GET_FAVOURITE_THEMES: {
       const { categoryId, subcategoryId } = action.data;
 
       const newCategories = state.items.map((x: ICategory) => {

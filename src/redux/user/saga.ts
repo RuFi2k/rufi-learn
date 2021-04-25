@@ -5,6 +5,7 @@ import { firebaseService } from "../rootSaga";
 import { addCompleted, addLiked, setCompleted, setLiked } from "./actions";
 import { app } from "../../services";
 import { getLikedSelector } from "./selectors";
+import { IThemeIdentifier } from "../../types/redux/user";
 
 function* getLiked(action: IAction) {
   try {
@@ -14,11 +15,19 @@ function* getLiked(action: IAction) {
       `users/${id}`
     );
 
-    const response: string[] = doc
-      .data()
-      .favourites.map((x: { id: string }) => x.id);
+    const paths = doc.data().favourites.map((x: { path: any }) => x.path)
 
-    yield put(setLiked(response));
+    const result = paths.map((path: string) => {
+      let theme, category, subcategory, rest;
+      [rest, theme] = path.split('/themes/');
+      [rest, subcategory] = rest.split('/subcategories/');
+      [rest, category] = rest.split('/categories/');
+      return {
+        theme, subcategory, category,
+      };
+    });
+
+    yield put(setLiked(result));
   } catch (e) {
     console.log(e.message);
   }
@@ -72,7 +81,9 @@ function* like(action: IAction) {
 
     yield call(likeReq, category, subcategory, theme, user);
 
-    yield put(addLiked(theme))
+    yield put(addLiked({
+      theme, category, subcategory,
+    }));
   } catch(e) {
     console.log(e.message);
   }
@@ -81,14 +92,14 @@ function* like(action: IAction) {
 function* dislike(action: IAction) {
   try{
     const { theme, user }: { [T: string]: string } = action.data;
-    const liked: string[] = yield select(getLikedSelector);
+    const liked: IThemeIdentifier[] = yield select(getLikedSelector);
     if(!user) {
       throw new Error('Unauthorized.');
     }
 
     yield call(dislikeReq, theme, user);
 
-    yield put(setLiked(liked.filter((x: string) => x !== theme)));
+    yield put(setLiked(liked.filter((x: IThemeIdentifier) => x.theme !== theme)));
   } catch(e) {
     console.log(e.message);
   }

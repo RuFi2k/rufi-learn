@@ -1,5 +1,5 @@
 import { IAction } from "../../types";
-import { IActionPayload } from "../../types/redux/user";
+import { IActionPayload, IThemeIdentifier } from "../../types/redux/user";
 
 const actions = {
   GET_LIKED: "user/GET_LIKED",
@@ -20,12 +20,12 @@ export const getLiked = (data: string): IAction => ({
   data,
 });
 
-export const setLiked = (data: string[]): IAction => ({
+export const setLiked = (data: IThemeIdentifier[]): IAction => ({
   type: actions.SET_LIKED,
   data,
 });
 
-export const addLiked = (data: string): IAction => ({
+export const addLiked = (data: IThemeIdentifier): IAction => ({
   type: actions.ADD_LIKED,
   data,
 });
