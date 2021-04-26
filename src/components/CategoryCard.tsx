@@ -95,13 +95,19 @@ const CategoryCard = ({ id, get, favourite = false }: Props): JSX.Element => {
     );
   };
 
+  const isNew = (category: ICategory): boolean => {
+    const deadline = new Date();
+    deadline.setDate(deadline.getDate() - 3);
+    return deadline.getTime() < category.lastModified;
+  }
+
   return category ? (
     <Card className={classes.card}>
       <CardHeader
         onClick={handleExpandClick}
         className={classes.header}
         classes={{ title: classes.title }}
-        title={generateName(category.name, true)}
+        title={generateName(category.name, isNew(category))}
         action={
           <IconButton aria-label="more">
             <ExpandMoreIcon

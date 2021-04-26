@@ -6,6 +6,7 @@ export interface ICategory {
   name: string;
   id: string;
   subcategories: ISubcategory[];
+  lastModified: number;
   subcategoriesLoading: boolean;
 }
 
@@ -33,7 +34,7 @@ export interface ILink {
 
 export interface ICategoryResponse {
   id: string;
-  data: () => { name: string };
+  data: () => { name: string, lastModified: number };
 }
 
 export interface ISubcategoryResponse {

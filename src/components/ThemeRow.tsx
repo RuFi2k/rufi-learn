@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import { NewBadge } from "./badges";
 
 const useStyles = makeStyles({
   row: {
@@ -12,6 +13,12 @@ const useStyles = makeStyles({
       backgroundColor: "#C4C4C444",
     },
   },
+  badge: {
+    marginLeft: 16,
+  },
+  flex: {
+    display: 'flex',
+  },
   name: {},
   actions: {},
 });
@@ -19,14 +26,24 @@ const useStyles = makeStyles({
 type Props = {
   name: string;
   onClick: () => void;
+  timestamp: number;
 };
 
-const ThemeRow = ({ name, onClick }: Props): JSX.Element => {
+const ThemeRow = ({ name, timestamp, onClick }: Props): JSX.Element => {
   const classes = useStyles();
+
+  const isNew = (time: number): boolean => {
+    const deadline = new Date();
+    deadline.setDate(deadline.getDate() - 3);
+    return deadline.getTime() < time;
+  }
 
   return (
     <div className={classes.row} onClick={onClick}>
-      <span className={classes.name}>{name}</span>
+      <div className={classes.flex}>
+        <span className={classes.name}>{name}</span>
+        {isNew(timestamp) && <NewBadge className={classes.badge} />}
+      </div>
       <div className={classes.actions}></div>
     </div>
   );
