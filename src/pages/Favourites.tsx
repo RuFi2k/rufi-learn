@@ -5,6 +5,7 @@ import { Loader } from "../components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesSelector, getFavouriteCategories, getFavouriteSubcategories } from "../redux/categories";
+import { getLikedLoading, getLikedSelector } from "../redux/user";
 
 const useStyles = makeStyles({
   content: {},
@@ -21,12 +22,17 @@ const useStyles = makeStyles({
 const Favourites = (): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const likedLoading = useSelector(getLikedLoading);
   const categories = useSelector(getCategoriesSelector);
+  const liked = useSelector(getLikedSelector)
 
   useEffect(() => {
-    dispatch(getFavouriteCategories());
+    console.log('effect', likedLoading, liked)
+    if(!likedLoading) {
+      dispatch(getFavouriteCategories());
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [likedLoading]);
 
   return (
     <MainLayout withNavbar>

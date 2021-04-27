@@ -1,6 +1,7 @@
 export interface IUserState {
   likedThemes: IThemeIdentifier[];
   completedThemes: string[];
+  likedLoading: boolean;
 }
 
 export interface IThemeIdentifier {
