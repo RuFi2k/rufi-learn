@@ -135,7 +135,6 @@ function* favouriteCategories() {
       firebaseService.firestore.getCollection,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories`
     );
-    console.log('snap', snapshot.docs.map(x => x.data()));
     const response = snapshot.docs.map(
       (doc: ICategoryResponse) =>
         ({
@@ -214,7 +213,21 @@ function* favouriteThemes(action: IAction) {
       })
     );
   } catch (e) {
-    console.log("getThemes", e.message);
+    console.log(e.message);
+  }
+}
+
+function* createTheme(action: IAction) {
+  try{
+    const { category, subcategory, theme } = action.data;
+    const response: unknown = yield call(
+      firebaseService.firestore.addDocument,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes`,
+      theme,
+    );
+    console.log('resp', response)
+  } catch(e) {
+    console.log(e.message);
   }
 }
 
@@ -226,6 +239,7 @@ function* categoriesSaga() {
   yield takeLatest(actions.GET_FAVOURITE_CATEGORIES, favouriteCategories);
   yield takeLatest(actions.GET_FAVOURITE_SUBCATEGORIES, favouriteSubcategories);
   yield takeLatest(actions.GET_FAVOURITE_THEMES, favouriteThemes);
+  yield takeLatest(actions.CREATE_THEME, createTheme);
 }
 
 export default categoriesSaga;

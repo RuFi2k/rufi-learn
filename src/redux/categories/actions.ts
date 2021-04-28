@@ -1,4 +1,4 @@
-import { IAction, ICategory, ISubcategorySuccess, ITheme } from "../../types";
+import { IAction, ICategory, ISubcategorySuccess, ITheme, IThemePayload } from "../../types";
 
 const actions = {
   SET_LOAING: "categories/SET_LOADING",
@@ -37,6 +37,10 @@ const actions = {
   GET_FAVOURITE_THEMES: "categories/GET_FAVOURITE_THEMES",
   GET_FAVOURITE_THEMES_SUCCESS: "categories/GET_FAVOURITE_THEMES_SUCCESS",
   GET_FAVOURITE_THEMES_ERROR: "categories/GET_FAVOURITE_THEMES_ERROR",
+
+  CREATE_THEME: "categories/CREATE_THEME",
+  CREATE_THEME_SUCCESS: "categories/CREATE_THEME_SUCCESS",
+  CREATE_THEME_ERROR: "categories/CREATE_THEME_ERROR",
 };
 
 export const setLoading = (data: boolean): IAction => ({
@@ -192,6 +196,20 @@ export const getFavouriteThemesSuccess = (data: ITheme[]): IAction => ({
 
 export const getFavouriteThemesError = (error: string): IAction => ({
   type: actions.GET_FAVOURITE_THEMES_ERROR,
+  error,
+});
+
+export const createTheme = (data: IThemePayload): IAction => ({
+  type: actions.CREATE_THEME,
+  data,
+});
+
+export const createThemeSuccess = (): IAction => ({
+  type: actions.CREATE_THEME_SUCCESS,
+});
+
+export const createThemeError = (error: string): IAction => ({
+  type: actions.CREATE_THEME_ERROR,
   error,
 });
 

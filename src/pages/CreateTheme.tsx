@@ -7,11 +7,12 @@ import {
   StepConnector,
   StepIconProps,
 } from "@material-ui/core";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Steps, StepIcon } from "../components";
+import { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Steps, StepIcon, AuthContext } from "../components";
 import { MainLayout } from "../layouts";
-import { refreshStepperState } from "../redux/stepper";
+import { createTheme } from "../redux/categories";
+import { getStepperPayload } from "../redux/stepper";
 import { IStep } from "../types/forms";
 
 const useStyles = makeStyles({
@@ -26,6 +27,8 @@ const CreateTheme = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const [step, setStep] = useState<number>(0);
+  const stepper = useSelector(getStepperPayload);
+  const auth = useContext(AuthContext);
 
   const handleNext = (): void => {
     setStep((prev) => ++prev);
@@ -36,8 +39,17 @@ const CreateTheme = (): JSX.Element => {
   };
 
   const handleSubmit = (): void => {
-    dispatch(refreshStepperState());
-    setStep(0);
+    const { category, subcategory } = stepper
+    const theme = {
+      description: stepper.description,
+      timestamp: new Date().getTime(),
+      name: stepper.name,
+      author: auth?.currentUser?.email || 'Unknown user',
+      useful_links: stepper.links,
+    };
+    dispatch(createTheme({
+      category, subcategory, theme,
+    }))
   };
 
   const stepProps = {

@@ -5,11 +5,11 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import React, { createRef, useEffect } from "react";
+import React, { createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { object, string } from "yup";
 import { Button, Input } from "..";
-import { addLink, getLinks } from "../../redux/stepper";
+import { addLink, getLinks, setDescription } from "../../redux/stepper";
 import UsefulLink from "../UsefulLink";
 
 const useStyles = makeStyles({
@@ -75,6 +75,7 @@ export const AdditionalInformation = ({ submit, prev }: Props): JSX.Element => {
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setFieldValue("description", e.target.value);
+    dispatch(setDescription(e.target.value));
   };
 
   const handleAddLink = (e: React.FormEvent): void => {

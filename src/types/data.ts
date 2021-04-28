@@ -27,6 +27,12 @@ export interface ITheme {
   timestamp: number;
 }
 
+export interface IThemePayload {
+  category: string,
+  subcategory: string,
+  theme: object,
+}
+
 export interface ILink {
   name: string;
   url: string;

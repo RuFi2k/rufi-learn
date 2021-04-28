@@ -10,11 +10,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { object, string } from "yup";
 import { Button, Select } from "..";
+import { getCategoriesSelector, getSubcategories, getSubcategoriesSelector } from "../../redux/categories";
 import { setLoading } from "../../redux/navbar";
 import {
   getCategory,
   getSubcategory,
-  loadSubcategories,
   setCategory,
   setSubcategory,
 } from "../../redux/stepper";
@@ -46,6 +46,8 @@ type Props = {
 export const Category = ({ next, prev }: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const categoryOptions = useSelector(getCategoriesSelector);
 
   const category = useSelector(getCategory);
   const subcategory = useSelector(getSubcategory);
@@ -79,6 +81,8 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
     validationSchema: schema,
   });
 
+  const subcategoriesOptions = useSelector(getSubcategoriesSelector(values.category));
+
   useEffect(() => {
     validateForm(values).then((errors) => setErrors(errors));
     // eslint-disable-next-line
@@ -87,16 +91,14 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
   useEffect(() => {
     dispatch(setCategory(values.category));
     dispatch(setLoading(true));
-    dispatch(loadSubcategories(values.category));
+    if(values.category){
+      dispatch(getSubcategories(values.category));
+    }
   }, [values.category, dispatch]);
 
   useEffect(() => {
     dispatch(setSubcategory(values.subcategory));
   }, [values.subcategory, dispatch]);
-
-  const items: Array<{ val: string; text: string }> = [
-    { val: "10", text: "Ten" },
-  ];
 
   const touch = (e: React.FocusEvent<HTMLInputElement>) => {
     setTouched({
@@ -124,38 +126,42 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
             name="category"
             onBlur={touch}
           >
-            {items.map((item) => (
-              <MenuItem value={item.val}>{item.text}</MenuItem>
+            {categoryOptions.items.map((item) => (
+              <MenuItem value={item.id}>{item.name}</MenuItem>
             ))}
           </Select>
           {errors.category && touched.category && (
             <FormHelperText>{errors.category}</FormHelperText>
           )}
         </FormControl>
-        <FormControl
-          className={classes.control}
-          error={!!errors.subcategory && touched.subcategory}
-        >
-          <InputLabel id="subcategory">Subategory</InputLabel>
-          <Select
-            labelId="subcategory"
-            value={values.subcategory}
-            onChange={(
-              e: React.ChangeEvent<{ name?: string; value: unknown }>
-            ) => {
-              setFieldValue("subcategory", e.target.value);
-            }}
-            name="subcategory"
-            onBlur={touch}
-          >
-            {items.map((item) => (
-              <MenuItem value={item.val}>{item.text}</MenuItem>
-            ))}
-          </Select>
-          {errors.subcategory && touched.subcategory && (
-            <FormHelperText>{errors.subcategory}</FormHelperText>
+          {values.category && (
+            <>
+            <FormControl
+              className={classes.control}
+              error={!!errors.subcategory && touched.subcategory}
+            >
+              <InputLabel id="subcategory">Subategory</InputLabel>
+                <Select
+                  labelId="subcategory"
+                  value={values.subcategory}
+                  onChange={(
+                    e: React.ChangeEvent<{ name?: string; value: unknown }>
+                  ) => {
+                    setFieldValue("subcategory", e.target.value);
+                  }}
+                  name="subcategory"
+                  onBlur={touch}
+                >
+                  {subcategoriesOptions.map((item) => (
+                    <MenuItem value={item.id}>{item.name}</MenuItem>
+                  ))}
+                </Select>
+              {errors.subcategory && touched.subcategory && (
+                <FormHelperText>{errors.subcategory}</FormHelperText>
+              )}
+            </FormControl>
+          </>
           )}
-        </FormControl>
       </div>
       <div className={classes.buttonGroup}>
         <Button className={classes.button} onClick={prev}>

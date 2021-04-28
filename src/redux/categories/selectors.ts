@@ -1,9 +1,11 @@
-import { ICategory, IState, ITheme } from "../../types";
+import { ICategory, IState, ISubcategory, ITheme } from "../../types";
 import { ICategoriesState } from "../../types/redux/categories";
 
 export const getCategoriesSelector = ({
   categories,
 }: IState): ICategoriesState => categories;
+
+export const getSubcategoriesSelector = (category: string) => ({ categories }: IState): Array<ISubcategory> => categories.items.find(x => x.id === category)?.subcategories || [];
 
 export const getCategorySelector = (id: string) => ({
   categories,
