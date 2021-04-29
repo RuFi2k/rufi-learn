@@ -1,10 +1,13 @@
 import { makeStyles } from "@material-ui/core";
 import { MainLayout } from "../layouts";
-import { CategoryCard } from "../components";
-import { Loader } from "../components";
+import { CategoryCard, Loader } from "../components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesSelector, getFavouriteCategories, getFavouriteSubcategories } from "../redux/categories";
+import {
+  getCategoriesSelector,
+  getFavouriteCategories,
+  getFavouriteSubcategories,
+} from "../redux/categories";
 import { getLikedLoading, getLikedSelector } from "../redux/user";
 
 const useStyles = makeStyles({
@@ -24,11 +27,11 @@ const Favourites = (): JSX.Element => {
   const dispatch = useDispatch();
   const likedLoading = useSelector(getLikedLoading);
   const categories = useSelector(getCategoriesSelector);
-  const liked = useSelector(getLikedSelector)
+  const liked = useSelector(getLikedSelector);
 
   useEffect(() => {
-    console.log('effect', likedLoading, liked)
-    if(!likedLoading) {
+    console.log("effect", likedLoading, liked);
+    if (!likedLoading) {
       dispatch(getFavouriteCategories());
     }
     // eslint-disable-next-line
@@ -41,7 +44,14 @@ const Favourites = (): JSX.Element => {
         {categories.isLoading ? (
           <Loader />
         ) : (
-          categories.items.map((c) => <CategoryCard key={c.id} favourite get={getFavouriteSubcategories} {...c} />)
+          categories.items.map((c) => (
+            <CategoryCard
+              key={c.id}
+              favourite
+              get={getFavouriteSubcategories}
+              {...c}
+            />
+          ))
         )}
       </div>
     </MainLayout>

@@ -1,4 +1,10 @@
-import { IAction, ICategory, ISubcategorySuccess, ITheme, IThemePayload } from "../../types";
+import {
+  IAction,
+  ICategory,
+  ISubcategorySuccess,
+  ITheme,
+  IThemePayload,
+} from "../../types";
 
 const actions = {
   SET_LOAING: "categories/SET_LOADING",
@@ -27,12 +33,15 @@ const actions = {
   UNSET_ACIVE_THEME: "categories/UNSET_ACTIVE_THEME",
 
   GET_FAVOURITE_CATEGORIES: "categories/GET_FAVOURITE_CATEGORIES",
-  GET_FAVOURITE_CATEGORIES_SUCCESS: "categories/GET_FAVOURITE_CATEGORIES_SUCCESS",
+  GET_FAVOURITE_CATEGORIES_SUCCESS:
+    "categories/GET_FAVOURITE_CATEGORIES_SUCCESS",
   GET_FAVOURITE_CATEGORIES_ERROR: "categories/GET_FAVOURITE_CATEGORIES_ERROR",
 
   GET_FAVOURITE_SUBCATEGORIES: "categories/GET_FAVOURITE_SUBCATEGORIES",
-  GET_FAVOURITE_SUBCATEGORIES_SUCCESS: "categories/GET_FAVOURITE_SUBCATEGORIES_SUCCESS",
-  GET_FAVOURITE_SUBCATEGORIES_ERROR: "categories/GET_FAVOURITE_SUBCATEGORIES_ERROR",
+  GET_FAVOURITE_SUBCATEGORIES_SUCCESS:
+    "categories/GET_FAVOURITE_SUBCATEGORIES_SUCCESS",
+  GET_FAVOURITE_SUBCATEGORIES_ERROR:
+    "categories/GET_FAVOURITE_SUBCATEGORIES_ERROR",
 
   GET_FAVOURITE_THEMES: "categories/GET_FAVOURITE_THEMES",
   GET_FAVOURITE_THEMES_SUCCESS: "categories/GET_FAVOURITE_THEMES_SUCCESS",
@@ -174,9 +183,11 @@ export const getFavouriteSubcategories = (data: string): IAction => ({
   data,
 });
 
-export const getFavouriteSubcategoriesSuccess = (data: ISubcategorySuccess): IAction => ({
+export const getFavouriteSubcategoriesSuccess = (
+  data: ISubcategorySuccess
+): IAction => ({
   type: actions.GET_FAVOURITE_SUBCATEGORIES_SUCCESS,
-  data
+  data,
 });
 
 export const getFavouriteSubcategoriesError = (error: string): IAction => ({

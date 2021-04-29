@@ -6,9 +6,9 @@ import { IUserState } from "./user";
 
 export * from "./navbar";
 export * from "./stepper";
-export * from './user';
-export * from './categories';
-export * from './auth';
+export * from "./user";
+export * from "./categories";
+export * from "./auth";
 
 export interface IAction {
   type: string;

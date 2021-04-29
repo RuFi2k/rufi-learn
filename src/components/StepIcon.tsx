@@ -1,6 +1,6 @@
 import { makeStyles, StepIconProps } from "@material-ui/core";
 import clsx from "clsx";
-import { CheckIcon } from "./Icons";
+import { CheckIcon } from ".";
 
 const useStyles = makeStyles({
   root: {

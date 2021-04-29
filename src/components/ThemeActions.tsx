@@ -5,11 +5,18 @@ import {
   CheckRoundedIcon,
   FavoriteBorderRoundedIcon,
   FavoriteIcon,
-} from "./Icons";
+  AuthContext,
+} from ".";
 import { useDispatch, useSelector } from "react-redux";
-import { completeRequest, dislikeRequest, getCompletedSelector, getLikedSelector, likeRequest, uncompleteRequest } from "../redux/user";
+import {
+  completeRequest,
+  dislikeRequest,
+  getCompletedSelector,
+  getLikedSelector,
+  likeRequest,
+  uncompleteRequest,
+} from "../redux/user";
 import { IThemeIdentifier } from "../types/redux/user";
-import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -59,7 +66,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ThemeActions = ({ category, subcategory, theme }: IThemeIdentifier): JSX.Element => {
+const ThemeActions = ({
+  category,
+  subcategory,
+  theme,
+}: IThemeIdentifier): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -71,31 +82,41 @@ const ThemeActions = ({ category, subcategory, theme }: IThemeIdentifier): JSX.E
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    setLiked(likedList.some(x => x.theme === theme));
+    setLiked(likedList.some((x) => x.theme === theme));
     setChecked(completedList.includes(theme));
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    setLiked(likedList.some(x => x.theme === theme));
+    setLiked(likedList.some((x) => x.theme === theme));
     setChecked(completedList.includes(theme));
     // eslint-disable-next-line
   }, [likedList, completedList]);
 
   const handleLike = (): void => {
-    const props = { category, subcategory, theme, user: auth?.currentUser?.uid || '' };
-    if(liked) {
-      dispatch(dislikeRequest(props))
-    } else{
+    const props = {
+      category,
+      subcategory,
+      theme,
+      user: auth?.currentUser?.uid || "",
+    };
+    if (liked) {
+      dispatch(dislikeRequest(props));
+    } else {
       dispatch(likeRequest(props));
     }
   };
 
   const handleCheck = (): void => {
-    const props = { category, subcategory, theme, user: auth?.currentUser?.uid || '' };
-    if(checked) {
-      dispatch(uncompleteRequest(props))
-    } else{
+    const props = {
+      category,
+      subcategory,
+      theme,
+      user: auth?.currentUser?.uid || "",
+    };
+    if (checked) {
+      dispatch(uncompleteRequest(props));
+    } else {
       dispatch(completeRequest(props));
     }
   };

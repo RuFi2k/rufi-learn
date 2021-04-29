@@ -8,9 +8,8 @@ import { useFormik } from "formik";
 import React, { createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { object, string } from "yup";
-import { Button, Input } from "..";
+import { Button, Input, UsefulLink } from "..";
 import { addLink, getLinks, setDescription } from "../../redux/stepper";
-import UsefulLink from "../UsefulLink";
 
 const useStyles = makeStyles({
   button: {

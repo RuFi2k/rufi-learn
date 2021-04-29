@@ -1,14 +1,13 @@
 import { makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ThemeList } from "..";
+import { ThemeList, Loader } from "..";
 import {
   clearThemes,
   getSubcategorySelector,
   ThemesPayload,
 } from "../../redux/categories";
 import { IAction, IModalProps } from "../../types";
-import Loader from "../Loader";
 import ModalLayout from "./ModalLayout";
 
 const useStyles = makeStyles({

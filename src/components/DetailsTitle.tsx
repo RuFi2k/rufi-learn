@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router";
-import { ArrowBackIosRoundedIcon } from "./Icons";
+import { ArrowBackIosRoundedIcon } from ".";
 
 const useStyles = makeStyles({
   wrapper: {

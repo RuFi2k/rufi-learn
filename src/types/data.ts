@@ -22,15 +22,15 @@ export interface ITheme {
   name: string;
   description: string;
   icon: string;
-  useful_links: /*ILink[] |*/ string[]; //update data and remove string array from interface soon TODO
+  useful_links: string[];
   author: string;
   timestamp: number;
 }
 
 export interface IThemePayload {
-  category: string,
-  subcategory: string,
-  theme: object,
+  category: string;
+  subcategory: string;
+  theme: object;
 }
 
 export interface ILink {
@@ -40,7 +40,7 @@ export interface ILink {
 
 export interface ICategoryResponse {
   id: string;
-  data: () => { name: string, lastModified: number };
+  data: () => { name: string; lastModified: number };
 }
 
 export interface ISubcategoryResponse {

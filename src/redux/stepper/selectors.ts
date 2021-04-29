@@ -2,13 +2,7 @@ import { IState } from "../../types";
 
 export const getStepper = ({ stepper }: IState) => stepper;
 export const getStepperPayload = ({ stepper }: IState) => {
-  const {
-    links,
-    category,
-    subcategory,
-    description,
-    name,
-  } = stepper;
+  const { links, category, subcategory, description, name } = stepper;
 
   return {
     links,
@@ -17,7 +11,7 @@ export const getStepperPayload = ({ stepper }: IState) => {
     description,
     name,
   };
-}
+};
 
 export const getCategory = ({ stepper }: IState) => stepper.category;
 export const getSubcategory = ({ stepper }: IState) => stepper.subcategory;

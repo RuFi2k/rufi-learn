@@ -15,15 +15,17 @@ function* getLiked(action: IAction) {
       `users/${id}`
     );
 
-    const paths = doc.data().favourites.map((x: { path: any }) => x.path)
+    const paths = doc.data().favourites.map((x: { path: any }) => x.path);
 
     const result = paths.map((path: string) => {
       let theme, category, subcategory, rest;
-      [rest, theme] = path.split('/themes/');
-      [rest, subcategory] = rest.split('/subcategories/');
-      [rest, category] = rest.split('/categories/');
+      [rest, theme] = path.split("/themes/");
+      [rest, subcategory] = rest.split("/subcategories/");
+      [rest, category] = rest.split("/categories/");
       return {
-        theme, subcategory, category,
+        theme,
+        subcategory,
+        category,
       };
     });
 
@@ -50,110 +52,168 @@ function* getCompleted(action: IAction) {
   }
 }
 
-const likeReq = async (category: string, subcategory: string, theme: string, user: string) => {
+const likeReq = async (
+  category: string,
+  subcategory: string,
+  theme: string,
+  user: string
+) => {
   const userdoc: any = await app.firestore().doc(`users/${user}`).get();
-  const response = await app.firestore().doc(`users/${user}`).set({
-    favourites: [
-      ...userdoc.data().favourites,
-      app.firestore().doc(`${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${theme}`)
-    ],
-  }, { merge: true });
+  const response = await app
+    .firestore()
+    .doc(`users/${user}`)
+    .set(
+      {
+        favourites: [
+          ...userdoc.data().favourites,
+          app
+            .firestore()
+            .doc(
+              `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${theme}`
+            ),
+        ],
+      },
+      { merge: true }
+    );
   return response;
-}
+};
 
 const dislikeReq = async (theme: string, user: string) => {
   const userdoc: any = await app.firestore().doc(`users/${user}`).get();
-  const response = await app.firestore().doc(`users/${user}`).set({
-    favourites: [
-      ...userdoc.data().favourites.filter((x: any) => x.id !== theme),
-    ],
-  }, { merge: true });
+  const response = await app
+    .firestore()
+    .doc(`users/${user}`)
+    .set(
+      {
+        favourites: [
+          ...userdoc.data().favourites.filter((x: any) => x.id !== theme),
+        ],
+      },
+      { merge: true }
+    );
   return response;
-}
+};
 
 function* like(action: IAction) {
-  try{
-    const { category, subcategory, theme, user }: { [T: string]: string } = action.data;
+  try {
+    const {
+      category,
+      subcategory,
+      theme,
+      user,
+    }: { [T: string]: string } = action.data;
 
-    if(!user) {
-      throw new Error('Unauthorized.');
+    if (!user) {
+      throw new Error("Unauthorized.");
     }
 
     yield call(likeReq, category, subcategory, theme, user);
 
-    yield put(addLiked({
-      theme, category, subcategory,
-    }));
-  } catch(e) {
+    yield put(
+      addLiked({
+        theme,
+        category,
+        subcategory,
+      })
+    );
+  } catch (e) {
     console.log(e.message);
   }
 }
 
 function* dislike(action: IAction) {
-  try{
+  try {
     const { theme, user }: { [T: string]: string } = action.data;
     const liked: IThemeIdentifier[] = yield select(getLikedSelector);
-    if(!user) {
-      throw new Error('Unauthorized.');
+    if (!user) {
+      throw new Error("Unauthorized.");
     }
 
     yield call(dislikeReq, theme, user);
 
-    yield put(setLiked(liked.filter((x: IThemeIdentifier) => x.theme !== theme)));
-  } catch(e) {
+    yield put(
+      setLiked(liked.filter((x: IThemeIdentifier) => x.theme !== theme))
+    );
+  } catch (e) {
     console.log(e.message);
   }
 }
 
-const completeReq = async (category: string, subcategory: string, theme: string, user: string) => {
+const completeReq = async (
+  category: string,
+  subcategory: string,
+  theme: string,
+  user: string
+) => {
   const userdoc: any = await app.firestore().doc(`users/${user}`).get();
-  const response = await app.firestore().doc(`users/${user}`).set({
-    completed: [
-      ...userdoc.data().favourites,
-      app.firestore().doc(`${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${theme}`)
-    ],
-  }, { merge: true });
+  const response = await app
+    .firestore()
+    .doc(`users/${user}`)
+    .set(
+      {
+        completed: [
+          ...userdoc.data().favourites,
+          app
+            .firestore()
+            .doc(
+              `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${theme}`
+            ),
+        ],
+      },
+      { merge: true }
+    );
   return response;
-}
+};
 
 const uncompleteReq = async (theme: string, user: string) => {
   const userdoc: any = await app.firestore().doc(`users/${user}`).get();
-  const response = await app.firestore().doc(`users/${user}`).set({
-    completed: [
-      ...userdoc.data().completed.filter((x: any) => x.id !== theme),
-    ],
-  }, { merge: true });
+  const response = await app
+    .firestore()
+    .doc(`users/${user}`)
+    .set(
+      {
+        completed: [
+          ...userdoc.data().completed.filter((x: any) => x.id !== theme),
+        ],
+      },
+      { merge: true }
+    );
   return response;
-}
+};
 
 function* complete(action: IAction) {
-  try{
-    const { category, subcategory, theme, user }: { [T: string]: string } = action.data;
+  try {
+    const {
+      category,
+      subcategory,
+      theme,
+      user,
+    }: { [T: string]: string } = action.data;
 
-    if(!user) {
-      throw new Error('Unauthorized.');
+    if (!user) {
+      throw new Error("Unauthorized.");
     }
 
     yield call(completeReq, category, subcategory, theme, user);
 
-    yield put(addCompleted(theme))
-  } catch(e) {
+    yield put(addCompleted(theme));
+  } catch (e) {
     console.log(e.message);
   }
 }
 
 function* uncomplete(action: IAction) {
-  try{
+  try {
     const { theme, user }: { [T: string]: string } = action.data;
     const liked: string[] = yield select(getLikedSelector);
-    if(!user) {
-      throw new Error('Unauthorized.');
+    if (!user) {
+      throw new Error("Unauthorized.");
     }
 
     yield call(uncompleteReq, theme, user);
 
     yield put(setCompleted(liked.filter((x: string) => x !== theme)));
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 }

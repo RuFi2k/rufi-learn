@@ -1,10 +1,13 @@
 import { makeStyles } from "@material-ui/core";
 import { MainLayout } from "../layouts";
-import { CategoryCard } from "../components";
-import { Loader } from "../components";
+import { CategoryCard, Loader } from "../components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getCategoriesSelector, getSubcategories } from "../redux/categories";
+import {
+  getCategories,
+  getCategoriesSelector,
+  getSubcategories,
+} from "../redux/categories";
 
 const useStyles = makeStyles({
   content: {},
@@ -35,7 +38,9 @@ const Explore = (): JSX.Element => {
         {categories.isLoading ? (
           <Loader />
         ) : (
-          categories.items.map((c) => <CategoryCard key={c.id} get={getSubcategories} {...c} />)
+          categories.items.map((c) => (
+            <CategoryCard key={c.id} get={getSubcategories} {...c} />
+          ))
         )}
       </div>
     </MainLayout>

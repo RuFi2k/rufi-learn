@@ -17,14 +17,6 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log(currentUser);
-  //   if (!currentUser && window.location.pathname !== "/login") {
-  //     history.push("/login");
-  //   }
-  //   // eslint-disable-next-line
-  // }, [currentUser]);
-
   useEffect(() => {
     app.auth().onAuthStateChanged((user) => {
       setUser(user);

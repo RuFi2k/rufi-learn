@@ -126,10 +126,10 @@ export function* getTheme(action: IAction) {
 }
 
 function* favouriteCategories() {
-  try{
+  try {
     const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
-    console.log(favourites)
-    const favouriteCategories: string[] = favourites.map(x => x.category);
+    console.log(favourites);
+    const favouriteCategories: string[] = favourites.map((x) => x.category);
 
     const snapshot: { docs: ICategoryResponse[] } = yield call(
       firebaseService.firestore.getCollection,
@@ -146,20 +146,26 @@ function* favouriteCategories() {
     );
     console.log(favouriteCategories, response);
 
-    yield put(getCategoriesSuccess(response.filter((x => favouriteCategories.includes(x.id)))));
-  } catch(e) {
+    yield put(
+      getCategoriesSuccess(
+        response.filter((x) => favouriteCategories.includes(x.id))
+      )
+    );
+  } catch (e) {
     console.log(e.message);
     yield put(getFavouriteCategoriesError(e.message));
   }
 }
 
 function* favouriteSubcategories(action: IAction) {
-  try{
+  try {
     const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
 
     const { data } = action;
 
-    const favSubcategories = favourites.filter(x => x.category === data).map(x => x.subcategory);
+    const favSubcategories = favourites
+      .filter((x) => x.category === data)
+      .map((x) => x.subcategory);
 
     const snapshot: { docs: ISubcategoryResponse[] } = yield call(
       firebaseService.firestore.getCollection,
@@ -176,11 +182,15 @@ function* favouriteSubcategories(action: IAction) {
         } as ISubcategory)
     );
 
-    yield put(getSubcategoriesSuccess({
-      categoryId: data,
-      subcategories: subcategories.filter(x => favSubcategories.includes(x.id)),
-    }));
-  } catch(e) {
+    yield put(
+      getSubcategoriesSuccess({
+        categoryId: data,
+        subcategories: subcategories.filter((x) =>
+          favSubcategories.includes(x.id)
+        ),
+      })
+    );
+  } catch (e) {
     console.log(e.message);
     yield put(getFavouriteSubcategoriesError(e.message));
   }
@@ -191,7 +201,11 @@ function* favouriteThemes(action: IAction) {
     const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
     const { categoryId, subcategoryId } = action.data;
 
-    const favThemes = favourites.filter(x => (x.category === categoryId && x.subcategory === subcategoryId)).map(x => x.theme);
+    const favThemes = favourites
+      .filter(
+        (x) => x.category === categoryId && x.subcategory === subcategoryId
+      )
+      .map((x) => x.theme);
 
     const snapshot: { docs: any[] } = yield call(
       firebaseService.firestore.getCollection,
@@ -209,7 +223,7 @@ function* favouriteThemes(action: IAction) {
       getThemesSuccess({
         categoryId,
         subcategoryId,
-        items: response.filter(x => favThemes.includes(x.id)),
+        items: response.filter((x) => favThemes.includes(x.id)),
       })
     );
   } catch (e) {
@@ -218,15 +232,15 @@ function* favouriteThemes(action: IAction) {
 }
 
 function* createTheme(action: IAction) {
-  try{
+  try {
     const { category, subcategory, theme } = action.data;
     const response: unknown = yield call(
       firebaseService.firestore.addDocument,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes`,
-      theme,
+      theme
     );
-    console.log('resp', response)
-  } catch(e) {
+    console.log("resp", response);
+  } catch (e) {
     console.log(e.message);
   }
 }

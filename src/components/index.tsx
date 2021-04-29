@@ -13,6 +13,7 @@ export { default as StepIcon } from "./StepIcon";
 export { default as Loader } from "./Loader";
 export { default as UsefulLink } from "./UsefulLink";
 export { default as ThemeRow } from "./ThemeRow";
+export { default as SubcategoryCard } from "./SubcategoryCard";
 export * as Steps from "./steps";
 export * from "./Icons";
 export * from "./modals";

@@ -15,10 +15,7 @@ import {
   getThemes,
 } from "../redux/categories";
 import { IAction, ICategory } from "../types";
-import { NewBadge } from "./badges";
-import { ExpandMoreIcon } from "./Icons";
-import Loader from "./Loader";
-import SubcategoryCard from "./SubcategoryCard";
+import { NewBadge, ExpandMoreIcon, Loader, SubcategoryCard } from ".";
 
 const useStyles = makeStyles({
   card: {
@@ -65,9 +62,9 @@ const useStyles = makeStyles({
 });
 
 interface Props extends ICategory {
-  get: (id: string) => IAction,
+  get: (id: string) => IAction;
   favourite?: boolean;
-};
+}
 
 const CategoryCard = ({ id, get, favourite = false }: Props): JSX.Element => {
   const classes = useStyles();
@@ -75,7 +72,7 @@ const CategoryCard = ({ id, get, favourite = false }: Props): JSX.Element => {
   const [expanded, toggleExpanded] = useState<boolean>(false);
   const category = useSelector(getCategorySelector(id));
 
-  const themeAction = favourite ? getFavouriteThemes : getThemes ;
+  const themeAction = favourite ? getFavouriteThemes : getThemes;
 
   const handleExpandClick = (): void => {
     if (expanded) {
@@ -99,7 +96,7 @@ const CategoryCard = ({ id, get, favourite = false }: Props): JSX.Element => {
     const deadline = new Date();
     deadline.setDate(deadline.getDate() - 3);
     return deadline.getTime() < category.lastModified;
-  }
+  };
 
   return category ? (
     <Card className={classes.card}>

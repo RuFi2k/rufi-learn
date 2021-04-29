@@ -76,7 +76,11 @@ const ThemeDetails = (): JSX.Element => {
           <>
             <div className={classes.header}>
               <DetailsTitle title={item?.name || "No title available"} />
-              <ThemeActions category={category} subcategory={subcategory} theme={id} />
+              <ThemeActions
+                category={category}
+                subcategory={subcategory}
+                theme={id}
+              />
             </div>
             <p className={classes.description}>{item?.description}</p>
             <h2>Useful links</h2>

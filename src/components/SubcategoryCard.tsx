@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   resetActiveSubcategory,
@@ -7,7 +7,7 @@ import {
   ThemesPayload,
 } from "../redux/categories";
 import { IAction } from "../types";
-import { ThemesModal } from "./modals";
+import { ThemesModal } from ".";
 
 const useStyles = makeStyles({
   wrapper: {

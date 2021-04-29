@@ -10,7 +10,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { object, string } from "yup";
 import { Button, Select } from "..";
-import { getCategoriesSelector, getSubcategories, getSubcategoriesSelector } from "../../redux/categories";
+import {
+  getCategoriesSelector,
+  getSubcategories,
+  getSubcategoriesSelector,
+} from "../../redux/categories";
 import { setLoading } from "../../redux/navbar";
 import {
   getCategory,
@@ -81,7 +85,9 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
     validationSchema: schema,
   });
 
-  const subcategoriesOptions = useSelector(getSubcategoriesSelector(values.category));
+  const subcategoriesOptions = useSelector(
+    getSubcategoriesSelector(values.category)
+  );
 
   useEffect(() => {
     validateForm(values).then((errors) => setErrors(errors));
@@ -91,7 +97,7 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
   useEffect(() => {
     dispatch(setCategory(values.category));
     dispatch(setLoading(true));
-    if(values.category){
+    if (values.category) {
       dispatch(getSubcategories(values.category));
     }
   }, [values.category, dispatch]);
@@ -134,34 +140,34 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
             <FormHelperText>{errors.category}</FormHelperText>
           )}
         </FormControl>
-          {values.category && (
-            <>
+        {values.category && (
+          <>
             <FormControl
               className={classes.control}
               error={!!errors.subcategory && touched.subcategory}
             >
               <InputLabel id="subcategory">Subategory</InputLabel>
-                <Select
-                  labelId="subcategory"
-                  value={values.subcategory}
-                  onChange={(
-                    e: React.ChangeEvent<{ name?: string; value: unknown }>
-                  ) => {
-                    setFieldValue("subcategory", e.target.value);
-                  }}
-                  name="subcategory"
-                  onBlur={touch}
-                >
-                  {subcategoriesOptions.map((item) => (
-                    <MenuItem value={item.id}>{item.name}</MenuItem>
-                  ))}
-                </Select>
+              <Select
+                labelId="subcategory"
+                value={values.subcategory}
+                onChange={(
+                  e: React.ChangeEvent<{ name?: string; value: unknown }>
+                ) => {
+                  setFieldValue("subcategory", e.target.value);
+                }}
+                name="subcategory"
+                onBlur={touch}
+              >
+                {subcategoriesOptions.map((item) => (
+                  <MenuItem value={item.id}>{item.name}</MenuItem>
+                ))}
+              </Select>
               {errors.subcategory && touched.subcategory && (
                 <FormHelperText>{errors.subcategory}</FormHelperText>
               )}
             </FormControl>
           </>
-          )}
+        )}
       </div>
       <div className={classes.buttonGroup}>
         <Button className={classes.button} onClick={prev}>

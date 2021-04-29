@@ -29,7 +29,11 @@ const ThemeList = ({ themes }: Props): JSX.Element => {
   return (
     <div className={classes.wrapper}>
       {themes.map((theme) => (
-        <ThemeRow name={theme.name} timestamp={theme.timestamp} onClick={() => handleRedirect(theme.id)} />
+        <ThemeRow
+          name={theme.name}
+          timestamp={theme.timestamp}
+          onClick={() => handleRedirect(theme.id)}
+        />
       ))}
     </div>
   );

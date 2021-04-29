@@ -1,7 +1,14 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./components";
-import { Explore, Login, Register, CreateTheme, ThemeDetails, Favourites } from "./pages";
+import {
+  Explore,
+  Login,
+  Register,
+  CreateTheme,
+  ThemeDetails,
+  Favourites,
+} from "./pages";
 import { IRoute } from "./types";
 
 const routes: IRoute[] = [
@@ -22,7 +29,7 @@ const routes: IRoute[] = [
     component: Explore,
   },
   {
-    path: '/favourites',
+    path: "/favourites",
     exact: true,
     private: true,
     component: Favourites,

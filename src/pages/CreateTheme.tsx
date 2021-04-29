@@ -39,17 +39,21 @@ const CreateTheme = (): JSX.Element => {
   };
 
   const handleSubmit = (): void => {
-    const { category, subcategory } = stepper
+    const { category, subcategory } = stepper;
     const theme = {
       description: stepper.description,
       timestamp: new Date().getTime(),
       name: stepper.name,
-      author: auth?.currentUser?.email || 'Unknown user',
+      author: auth?.currentUser?.email || "Unknown user",
       useful_links: stepper.links,
     };
-    dispatch(createTheme({
-      category, subcategory, theme,
-    }))
+    dispatch(
+      createTheme({
+        category,
+        subcategory,
+        theme,
+      })
+    );
   };
   useEffect(() => {
     dispatch(getCategories());

@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { removeLink } from "../redux/stepper";
-import { DeleteIcon } from "./Icons";
+import { DeleteIcon } from ".";
 
 const useStyles = makeStyles({
   wrapper: {

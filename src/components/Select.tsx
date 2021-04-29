@@ -1,22 +1,7 @@
-import { makeStyles, Select, SelectProps } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  root: {
-    // padding: "10px 32px 10px 14px",
-  },
-});
+import { Select, SelectProps } from "@material-ui/core";
 
 const StyledSelect = ({ ...props }: SelectProps): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <Select
-      {...props}
-      classes={{
-        root: classes.root,
-      }}
-    />
-  );
+  return <Select {...props} />;
 };
 
 export default StyledSelect;

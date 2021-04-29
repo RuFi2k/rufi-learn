@@ -7,7 +7,6 @@ import { Button, Input } from "..";
 import { getName, setName } from "../../redux/stepper";
 
 const useStyles = makeStyles({
-  wrapper: {},
   buttonGroup: {
     marginTop: 12,
     display: "flex",
@@ -87,7 +86,7 @@ const Name = ({ next }: Props): JSX.Element => {
   };
 
   return (
-    <div className={classes.wrapper}>
+    <div>
       <FormControl error={!!errors.name && touched.name} fullWidth>
         <Input
           placeholder="Name"

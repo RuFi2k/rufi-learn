@@ -5,7 +5,10 @@ export const getCategoriesSelector = ({
   categories,
 }: IState): ICategoriesState => categories;
 
-export const getSubcategoriesSelector = (category: string) => ({ categories }: IState): Array<ISubcategory> => categories.items.find(x => x.id === category)?.subcategories || [];
+export const getSubcategoriesSelector = (category: string) => ({
+  categories,
+}: IState): Array<ISubcategory> =>
+  categories.items.find((x) => x.id === category)?.subcategories || [];
 
 export const getCategorySelector = (id: string) => ({
   categories,
@@ -14,7 +17,7 @@ export const getCategorySelector = (id: string) => ({
 export const getSubcategorySelector = (
   categoryId: string,
   subcategoryId: string
-) => ({ categories }: IState) =>
+) => ({ categories }: IState): ISubcategory | undefined =>
   categories.items
     .find((x) => x.id === categoryId)
     ?.subcategories.find((x) => x.id === subcategoryId);

@@ -17,10 +17,8 @@ const useStyles = makeStyles({
     marginLeft: 16,
   },
   flex: {
-    display: 'flex',
+    display: "flex",
   },
-  name: {},
-  actions: {},
 });
 
 type Props = {
@@ -36,15 +34,14 @@ const ThemeRow = ({ name, timestamp, onClick }: Props): JSX.Element => {
     const deadline = new Date();
     deadline.setDate(deadline.getDate() - 3);
     return deadline.getTime() < time;
-  }
+  };
 
   return (
     <div className={classes.row} onClick={onClick}>
       <div className={classes.flex}>
-        <span className={classes.name}>{name}</span>
+        <span>{name}</span>
         {isNew(timestamp) && <NewBadge className={classes.badge} />}
       </div>
-      <div className={classes.actions}></div>
     </div>
   );
 };
