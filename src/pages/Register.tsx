@@ -1,10 +1,13 @@
 import { makeStyles } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { object, ref, string } from "yup";
 import { Button, Input, Link } from "../components";
 import { AuthLayout } from "../layouts";
 import { IRegister } from "../types";
+import { registerAction } from "../redux/auth";
 
 const useStyles = makeStyles({
   loginForm: {
@@ -26,6 +29,8 @@ const useStyles = makeStyles({
 
 const Register = (): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [disabled, toggleDisabled] = useState<boolean>(false);
 
@@ -35,6 +40,8 @@ const Register = (): JSX.Element => {
     setTimeout(() => {
       toggleDisabled(false);
     }, 1500);
+    const { email, password } = values;
+    dispatch(registerAction(email, password, history));
   };
 
   const schema = object().shape({

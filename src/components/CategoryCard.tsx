@@ -15,7 +15,7 @@ import {
   getThemes,
 } from "../redux/categories";
 import { IAction, ICategory } from "../types";
-import { NewBadge, ExpandMoreIcon, Loader, SubcategoryCard } from ".";
+import { Loader, SubcategoryCard, NewBadge, ExpandMoreIcon } from ".";
 
 const useStyles = makeStyles({
   card: {

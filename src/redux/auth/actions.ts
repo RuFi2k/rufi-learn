@@ -9,6 +9,10 @@ const actions = {
   LOGOUT_ACTION_SUCCESS: "auth/LOGOUT_ACTION_SUCCESS",
   LOGOUT_ACTION_ERROR: "auth/LOGOUT_ACTION_ERROR",
 
+  REGISTER_ACTION: "auth/REGISTER_ACTION",
+  REGISTER_ACTION_SUCCESS: "auth/REGISTER_ACTION_SUCCESS",
+  REGISTER_ACTION_ERROR: "auth/REGISTER_ACTION_ERROR",
+
   REMOVE_SNACKBAR: "auth/REMOVE_SNACKBAR",
 };
 
@@ -18,6 +22,19 @@ export const loginAction = (
   history: unknown
 ): IAction => ({
   type: actions.LOGIN_ACTION,
+  data: {
+    email,
+    password,
+    history,
+  },
+});
+
+export const registerAction = (
+  email: string,
+  password: string,
+  history: unknown
+): IAction => ({
+  type: actions.REGISTER_ACTION,
   data: {
     email,
     password,

@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Steps, StepIcon, AuthContext } from "../components";
+import { StepIcon, AuthContext, Name, AdditionalInformation, Category } from "../components";
 import { MainLayout } from "../layouts";
 import { createTheme, getCategories } from "../redux/categories";
 import { getStepperPayload } from "../redux/stepper";
@@ -69,15 +69,15 @@ const CreateTheme = (): JSX.Element => {
   const steps: IStep[] = [
     {
       title: "Type a theme name",
-      component: <Steps.Name {...stepProps} />,
+      component: <Name {...stepProps} />,
     },
     {
       title: "Select a category",
-      component: <Steps.Category {...stepProps} />,
+      component: <Category {...stepProps} />,
     },
     {
       title: "Add some information",
-      component: <Steps.AdditionalInformation {...stepProps} />,
+      component: <AdditionalInformation {...stepProps} />,
     },
   ];
 

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { NewBadge } from "./badges";
+import { NewBadge } from ".";
 
 const useStyles = makeStyles({
   row: {

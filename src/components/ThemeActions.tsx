@@ -1,12 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
-import {
-  CheckRoundedIcon,
-  FavoriteBorderRoundedIcon,
-  FavoriteIcon,
-  AuthContext,
-} from ".";
 import { useDispatch, useSelector } from "react-redux";
 import {
   completeRequest,
@@ -17,6 +11,7 @@ import {
   uncompleteRequest,
 } from "../redux/user";
 import { IThemeIdentifier } from "../types/redux/user";
+import { CheckRoundedIcon, FavoriteBorderRoundedIcon, FavoriteIcon, AuthContext } from ".";
 
 const useStyles = makeStyles({
   wrapper: {

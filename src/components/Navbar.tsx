@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { useHistory } from "react-router";
 import { IMenuSection } from "../types";
-import { AddRoundedIcon, ExtensionIcon, StarRoundedIcon } from ".";
+import { AddRoundedIcon, ExtensionIcon, StarRoundedIcon } from "./Icons";
 
 const useStyles = makeStyles({
   navbar: {

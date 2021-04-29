@@ -29,9 +29,32 @@ function* logout(): any {
   }
 }
 
+function* register(action: IAction): any {
+  try{
+    const { email, password } = action.data;
+    const user = yield call(firebaseService.auth.createUserWithEmailAndPassword, email, password);
+    console.log('user', user);
+
+    yield call(
+      firebaseService.firestore.setDocument,
+      `users/${user.user.uid}`,
+      {
+        email,
+        completed: [],
+        favourites: [],
+        watched: [],
+      },
+      {},
+    );
+  } catch(e) {
+    console.log(e.message);
+  }
+}
+
 function* AuthSaga(): any {
   yield takeLatest(actions.LOGIN_ACTION, login);
   yield takeLatest(actions.LOGOUT_ACTION, logout);
+  yield takeLatest(actions.REGISTER_ACTION, register);
 }
 
 export default AuthSaga;
