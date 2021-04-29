@@ -7,11 +7,11 @@ import {
   StepConnector,
   StepIconProps,
 } from "@material-ui/core";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Steps, StepIcon, AuthContext } from "../components";
 import { MainLayout } from "../layouts";
-import { createTheme } from "../redux/categories";
+import { createTheme, getCategories } from "../redux/categories";
 import { getStepperPayload } from "../redux/stepper";
 import { IStep } from "../types/forms";
 
@@ -51,6 +51,10 @@ const CreateTheme = (): JSX.Element => {
       category, subcategory, theme,
     }))
   };
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line
+  }, []);
 
   const stepProps = {
     next: handleNext,
