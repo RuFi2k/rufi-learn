@@ -11,7 +11,12 @@ import {
   uncompleteRequest,
 } from "../redux/user";
 import { IThemeIdentifier } from "../types/redux/user";
-import { CheckRoundedIcon, FavoriteBorderRoundedIcon, FavoriteIcon, AuthContext } from ".";
+import {
+  CheckRoundedIcon,
+  FavoriteBorderRoundedIcon,
+  FavoriteIcon,
+  AuthContext,
+} from ".";
 
 const useStyles = makeStyles({
   wrapper: {

@@ -30,10 +30,14 @@ function* logout(): any {
 }
 
 function* register(action: IAction): any {
-  try{
+  try {
     const { email, password } = action.data;
-    const user = yield call(firebaseService.auth.createUserWithEmailAndPassword, email, password);
-    console.log('user', user);
+    const user = yield call(
+      firebaseService.auth.createUserWithEmailAndPassword,
+      email,
+      password
+    );
+    console.log("user", user);
 
     yield call(
       firebaseService.firestore.setDocument,
@@ -44,9 +48,9 @@ function* register(action: IAction): any {
         favourites: [],
         watched: [],
       },
-      {},
+      {}
     );
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 }

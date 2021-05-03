@@ -9,7 +9,13 @@ import {
 } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StepIcon, AuthContext, Name, AdditionalInformation, Category } from "../components";
+import {
+  StepIcon,
+  AuthContext,
+  Name,
+  AdditionalInformation,
+  Category,
+} from "../components";
 import { MainLayout } from "../layouts";
 import { createTheme, getCategories } from "../redux/categories";
 import { getStepperPayload } from "../redux/stepper";

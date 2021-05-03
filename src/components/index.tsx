@@ -14,7 +14,7 @@ export { default as Loader } from "./Loader";
 export { default as UsefulLink } from "./UsefulLink";
 export { default as ThemeRow } from "./ThemeRow";
 export { default as SubcategoryCard } from "./SubcategoryCard";
-export * from './badges';
+export * from "./badges";
 export * from "./Icons";
 export * from "./modals";
 export * from "./steps";
