@@ -36,7 +36,6 @@ const Register = (): JSX.Element => {
 
   const handleSubmit = (values: IRegister): void => {
     toggleDisabled(true);
-    console.log(values);
     setTimeout(() => {
       toggleDisabled(false);
     }, 1500);

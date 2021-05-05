@@ -37,7 +37,6 @@ function* register(action: IAction): any {
       email,
       password
     );
-    console.log("user", user);
 
     yield call(
       firebaseService.firestore.setDocument,

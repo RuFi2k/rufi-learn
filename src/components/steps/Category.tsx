@@ -15,7 +15,6 @@ import {
   getSubcategories,
   getSubcategoriesSelector,
 } from "../../redux/categories";
-import { setLoading } from "../../redux/navbar";
 import {
   getCategory,
   getSubcategory,
@@ -96,7 +95,6 @@ export const Category = ({ next, prev }: Props): JSX.Element => {
 
   useEffect(() => {
     dispatch(setCategory(values.category));
-    dispatch(setLoading(true));
     if (values.category) {
       dispatch(getSubcategories(values.category));
     }

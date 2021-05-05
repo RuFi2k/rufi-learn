@@ -30,7 +30,6 @@ const Favourites = (): JSX.Element => {
   const liked = useSelector(getLikedSelector);
 
   useEffect(() => {
-    console.log("effect", likedLoading, liked);
     if (!likedLoading) {
       dispatch(getFavouriteCategories());
     }

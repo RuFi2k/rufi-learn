@@ -145,7 +145,6 @@ function* favouriteCategories() {
           subcategoriesLoading: false,
         } as ICategory)
     );
-    console.log(favouriteCategories, response);
 
     yield put(
       getCategoriesSuccess(
