@@ -9,6 +9,7 @@ import {
   IThemeIdentifier,
 } from "../../types";
 import { firebaseService } from "../rootSaga";
+import { refreshStepperState } from "../stepper";
 import { getLikedSelector } from "../user";
 import {
   getCategoriesError,
@@ -233,13 +234,21 @@ function* favouriteThemes(action: IAction) {
 
 function* createTheme(action: IAction) {
   try {
-    const { category, subcategory, theme } = action.data;
-    const response: unknown = yield call(
+    const { category, subcategory, theme, history } = action.data;
+    const response: { id: string } = yield call(
       firebaseService.firestore.addDocument,
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes`,
       theme
     );
-    console.log("resp", response);
+    yield call(
+      firebaseService.firestore.updateDocument,
+      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}`,
+      {
+        lastModified: new Date().getTime(),
+      }
+    );
+    yield put(refreshStepperState());
+    history.push(`/details/${category}/${subcategory}/${response.id}`);
   } catch (e) {
     console.log(e.message);
   }

@@ -24,6 +24,7 @@ const actions = {
   GET_THEMES_SUCCESS: "categories/GET_THEMES_SUCCESS",
   GET_THEMES_ERROR: "categories/GET_THEMES_ERROR",
   CLEAR_THEMES: "categories/CLEAR_THEMES",
+  ADD_THEME: "categories/ADD_THEME",
 
   GET_THEME: "categories/GET_THEME",
   GET_THEME_SUCCESS: "categories/GET_THEME_SUCCESS",
@@ -210,7 +211,7 @@ export const getFavouriteThemesError = (error: string): IAction => ({
   error,
 });
 
-export const createTheme = (data: IThemePayload): IAction => ({
+export const createTheme = (data: IThemePayload & { history: unknown }): IAction => ({
   type: actions.CREATE_THEME,
   data,
 });
@@ -222,6 +223,11 @@ export const createThemeSuccess = (): IAction => ({
 export const createThemeError = (error: string): IAction => ({
   type: actions.CREATE_THEME_ERROR,
   error,
+});
+
+export const addTheme = (data: any): IAction => ({
+  type: actions.ADD_THEME,
+  data,
 });
 
 export default actions;

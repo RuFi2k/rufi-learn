@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   StepIcon,
   AuthContext,
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 
 const CreateTheme = (): JSX.Element => {
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [step, setStep] = useState<number>(0);
@@ -58,6 +60,7 @@ const CreateTheme = (): JSX.Element => {
         category,
         subcategory,
         theme,
+        history,
       })
     );
   };
