@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "@redux-saga/core/effects";
 import { actions } from ".";
-import { IAction } from "../../types";
+import { Error, IAction } from "../../types";
 import { firebaseService } from "../rootSaga";
 import { loginActionError, loginActionSuccess } from "./actions";
 
@@ -15,43 +15,34 @@ function* login(action: IAction): any {
 
     yield put(loginActionSuccess(userCredential));
     history.push("/explore");
-  } catch (e) {
-    console.log("login failed", e.message);
-    yield put(loginActionError(e.message));
+  } catch (e: unknown) {
+    yield put(loginActionError((e as Error).message));
   }
 }
 
 function* logout(): any {
-  try {
-    yield call(firebaseService.auth.signOut);
-  } catch (e) {
-    console.log(e.message);
-  }
+  yield call(firebaseService.auth.signOut);
 }
 
 function* register(action: IAction): any {
-  try {
-    const { email, password } = action.data;
-    const user = yield call(
-      firebaseService.auth.createUserWithEmailAndPassword,
-      email,
-      password
-    );
+  const { email, password } = action.data;
+  const user = yield call(
+    firebaseService.auth.createUserWithEmailAndPassword,
+    email,
+    password
+  );
 
-    yield call(
-      firebaseService.firestore.setDocument,
-      `users/${user.user.uid}`,
-      {
-        email,
-        completed: [],
-        favourites: [],
-        watched: [],
-      },
-      {}
-    );
-  } catch (e) {
-    console.log(e.message);
-  }
+  yield call(
+    firebaseService.firestore.setDocument,
+    `users/${user.user.uid}`,
+    {
+      email,
+      completed: [],
+      favourites: [],
+      watched: [],
+    },
+    {}
+  );
 }
 
 function* AuthSaga(): any {

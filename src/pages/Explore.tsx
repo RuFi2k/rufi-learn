@@ -34,7 +34,7 @@ const Explore = (): JSX.Element => {
   return (
     <MainLayout withNavbar>
       <div className={classes.content}>
-        <h1 className={classes.heading}>Select category</h1>
+        <h1 data-testid="explore-header" className={classes.heading}>Select category</h1>
         {categories.isLoading ? (
           <Loader />
         ) : (

@@ -73,7 +73,7 @@ const Navbar = (): JSX.Element => {
     <div className={clsx(classes.navbar, "no-scroll")}>
       {menu.map((section, id) => (
         <span key={id}>
-          <span className={classes.sectionTitle}>{section.title}</span>
+          <span data-testid="nav-title" className={classes.sectionTitle}>{section.title}</span>
           {section.items.map((item) => {
             const Icon = item.icon;
 

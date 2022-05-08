@@ -7,6 +7,7 @@ import {
   ISubcategory,
   ISubcategoryResponse,
   IThemeIdentifier,
+  Error
 } from "../../types";
 import { firebaseService } from "../rootSaga";
 import { refreshStepperState } from "../stepper";
@@ -48,9 +49,8 @@ function* getSubcategories(action: IAction) {
         subcategories,
       })
     );
-  } catch (e) {
-    console.log(e.message);
-    yield put(getSubcategoriesError(e.message));
+  } catch (e: unknown) {
+    yield put(getSubcategoriesError((e as Error).message));
   }
 }
 
@@ -71,38 +71,33 @@ function* getCategories() {
     );
 
     yield put(getCategoriesSuccess(response));
-  } catch (e) {
-    console.log(e.message);
-    yield put(getCategoriesError(e.message));
+  } catch (e: unknown) {
+    yield put(getCategoriesError((e as Error).message));
   }
 }
 
 function* getThemes(action: IAction) {
-  try {
-    const { categoryId, subcategoryId } = action.data;
+  const { categoryId, subcategoryId } = action.data;
 
-    const snapshot: { docs: any[] } = yield call(
-      firebaseService.firestore.getCollection,
-      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
-    );
+  const snapshot: { docs: any[] } = yield call(
+    firebaseService.firestore.getCollection,
+    `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
+  );
 
-    const response = snapshot.docs.map(
-      (doc: { id: string; data: () => any }) => ({
-        ...doc.data(),
-        id: doc.id,
-      })
-    );
+  const response = snapshot.docs.map(
+    (doc: { id: string; data: () => any }) => ({
+      ...doc.data(),
+      id: doc.id,
+    })
+  );
 
-    yield put(
-      getThemesSuccess({
-        categoryId,
-        subcategoryId,
-        items: response,
-      })
-    );
-  } catch (e) {
-    console.log("getThemes", e.message);
-  }
+  yield put(
+    getThemesSuccess({
+      categoryId,
+      subcategoryId,
+      items: response,
+    })
+  );
 }
 
 export function* getTheme(action: IAction) {
@@ -113,23 +108,20 @@ export function* getTheme(action: IAction) {
       `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes/${id}`
     );
 
-    console.log(doc.data());
     const response = {
       id: doc.id,
       ...doc.data(),
     };
 
     yield put(getThemeSuccess(response));
-  } catch (e) {
-    console.log(e.message);
-    yield put(getThemeError(e.message));
+  } catch (e: unknown) {
+    yield put(getThemeError((e as Error).message));
   }
 }
 
 function* favouriteCategories() {
   try {
     const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
-    console.log(favourites);
     const favouriteCategories: string[] = favourites.map((x) => x.category);
 
     const snapshot: { docs: ICategoryResponse[] } = yield call(
@@ -151,9 +143,8 @@ function* favouriteCategories() {
         response.filter((x) => favouriteCategories.includes(x.id))
       )
     );
-  } catch (e) {
-    console.log(e.message);
-    yield put(getFavouriteCategoriesError(e.message));
+  } catch (e: unknown) {
+    yield put(getFavouriteCategoriesError((e as Error).message));
   }
 }
 
@@ -190,67 +181,58 @@ function* favouriteSubcategories(action: IAction) {
         ),
       })
     );
-  } catch (e) {
-    console.log(e.message);
+  } catch (e: unknown) {
     yield put(getFavouriteSubcategoriesError(e.message));
   }
 }
 
 function* favouriteThemes(action: IAction) {
-  try {
-    const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
-    const { categoryId, subcategoryId } = action.data;
+  const favourites: IThemeIdentifier[] = yield select(getLikedSelector);
+  const { categoryId, subcategoryId } = action.data;
 
-    const favThemes = favourites
-      .filter(
-        (x) => x.category === categoryId && x.subcategory === subcategoryId
-      )
-      .map((x) => x.theme);
+  const favThemes = favourites
+    .filter(
+      (x) => x.category === categoryId && x.subcategory === subcategoryId
+    )
+    .map((x) => x.theme);
 
-    const snapshot: { docs: any[] } = yield call(
-      firebaseService.firestore.getCollection,
-      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
-    );
+  const snapshot: { docs: any[] } = yield call(
+    firebaseService.firestore.getCollection,
+    `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${categoryId}/subcategories/${subcategoryId}/themes`
+  );
 
-    const response = snapshot.docs.map(
-      (doc: { id: string; data: () => any }) => ({
-        ...doc.data(),
-        id: doc.id,
-      })
-    );
+  const response = snapshot.docs.map(
+    (doc: { id: string; data: () => any }) => ({
+      ...doc.data(),
+      id: doc.id,
+    })
+  );
 
-    yield put(
-      getThemesSuccess({
-        categoryId,
-        subcategoryId,
-        items: response.filter((x) => favThemes.includes(x.id)),
-      })
-    );
-  } catch (e) {
-    console.log(e.message);
-  }
+  yield put(
+    getThemesSuccess({
+      categoryId,
+      subcategoryId,
+      items: response.filter((x) => favThemes.includes(x.id)),
+    })
+  );
 }
 
 function* createTheme(action: IAction) {
-  try {
-    const { category, subcategory, theme, history } = action.data;
-    const response: { id: string } = yield call(
-      firebaseService.firestore.addDocument,
-      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes`,
-      theme
-    );
-    yield call(
-      firebaseService.firestore.updateDocument,
-      `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}`,
-      {
-        lastModified: new Date().getTime(),
-      }
-    );
-    yield put(refreshStepperState());
-    history.push(`/details/${category}/${subcategory}/${response.id}`);
-  } catch (e) {
-    console.log(e.message);
-  }
+  const { category, subcategory, theme, history } = action.data;
+  const response: { id: string } = yield call(
+    firebaseService.firestore.addDocument,
+    `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}/subcategories/${subcategory}/themes`,
+    theme
+  );
+  yield call(
+    firebaseService.firestore.updateDocument,
+    `${process.env.REACT_APP_FIRESTORE_ROOT_APP}/categories/${category}`,
+    {
+      lastModified: new Date().getTime(),
+    }
+  );
+  yield put(refreshStepperState());
+  history.push(`/details/${category}/${subcategory}/${response.id}`);
 }
 
 function* categoriesSaga() {

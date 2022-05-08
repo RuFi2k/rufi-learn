@@ -39,7 +39,7 @@ const Favourites = (): JSX.Element => {
   return (
     <MainLayout withNavbar>
       <div className={classes.content}>
-        <h1 className={classes.heading}>Favourites</h1>
+        <h1 data-testid="favourites-header" className={classes.heading}>Favourites</h1>
         {categories.isLoading ? (
           <Loader />
         ) : (

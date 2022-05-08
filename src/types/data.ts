@@ -52,3 +52,7 @@ export interface ISubcategorySuccess {
   categoryId: string;
   subcategories: ISubcategory[];
 }
+
+export interface Error {
+  message: string;
+}

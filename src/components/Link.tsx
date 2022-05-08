@@ -27,7 +27,7 @@ const Link = ({ className, to, children, onClick }: Props): JSX.Element => {
   };
 
   return (
-    <span className={clsx(className, classes.link)} onClick={handleClick}>
+    <span data-testid="link" className={clsx(className, classes.link)} onClick={handleClick}>
       {children}
     </span>
   );
